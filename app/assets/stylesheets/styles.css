@@ -1,0 +1,52 @@
+/* ============================== */
+/* ! Layout for desktop version   */
+/* ============================== */
+
+	body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #fff;
+    background: #000;
+	}
+
+  .header {
+    background: #181818; 
+  }
+
+  .header .logo {
+    width: 500px;
+    height: 100px;
+    background: url(/assets/nrdlogo.png) no-repeat;
+  }
+
+  .imageblock {
+    width: 250px;
+    height: 400px;
+  }
+	
+
+/* ============================= */
+/* ! Layout for mobile version   */
+/* ============================= */
+
+@media handheld, only screen and (max-width: 767px) {
+
+	body {
+		
+	}
+
+}
+
+
+/* ========================================== */
+/* ! Provide higher res assets for iPhone 4   */
+/* ========================================== */
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) { 
+
+/*	.logo {
+		background: url(logo2x.jpg) no-repeat;
+		background-size: 212px 303px;
+	}*/
+
+}
