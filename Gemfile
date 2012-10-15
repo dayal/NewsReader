@@ -12,10 +12,13 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'simplecov'  
   gem 'capybara'
+  gem 'database_cleaner'
+  gem 'feedzirra'
 end
 
 group :production do
   gem 'pg'
+  gem 'feedzirra'
 end
 
 # Gems used only for assets and not required
@@ -46,3 +49,4 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+gem 'haml'
