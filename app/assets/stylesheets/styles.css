@@ -19,9 +19,18 @@
     background: url(/assets/nrdlogo.png) no-repeat;
   }
 
-  .imageblock {
+  .midsection {
+    background: #181818;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .imageblock img {
     width: 250px;
     height: 400px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 	
 
