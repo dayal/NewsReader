@@ -7,11 +7,14 @@ gem 'rails', '3.2.7'
 group :development, :test do
 	gem 'sqlite3'
   gem 'ruby-debug19', :require => 'ruby-debug'
-  gem 'cucumber-rails'
-  gem 'cucumber-rails-training-wheels'
   gem 'rspec-rails'
   gem 'simplecov'  
   gem 'capybara'
+end
+
+group :test do
+  gem 'cucumber-rails', '~> 1.0.6'
+  gem 'database_cleaner'
 end
 
 group :production do
