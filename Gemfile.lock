@@ -58,14 +58,8 @@ GEM
       capybara (>= 1.1.1)
       cucumber (>= 1.0.6)
       nokogiri (>= 1.5.0)
-<<<<<<< HEAD
-    database_cleaner (0.9.1)
-=======
-    cucumber-rails-training-wheels (1.0.0)
-      cucumber-rails (>= 1.1.1)
     curb (0.8.1)
     database_cleaner (0.8.0)
->>>>>>> be17ddc4af6fb2ea8bb6786368024646c561bbfc
     diff-lcs (1.1.3)
     erubis (2.7.0)
     execjs (1.4.0)
@@ -191,16 +185,10 @@ PLATFORMS
 DEPENDENCIES
   capybara
   coffee-rails (~> 3.2.1)
-<<<<<<< HEAD
   cucumber-rails (~> 1.0.6)
-  database_cleaner
-=======
-  cucumber-rails
-  cucumber-rails-training-wheels
   database_cleaner
   feedzirra
   haml
->>>>>>> be17ddc4af6fb2ea8bb6786368024646c561bbfc
   jquery-rails
   pg
   rails (= 3.2.7)
