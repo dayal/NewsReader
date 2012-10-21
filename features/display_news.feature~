@@ -14,7 +14,7 @@ Scenario: go to article page
 	Then I should see "Presidential Race"
 	And I should see "Other News"
 	When I follow "Presidential Race"
-	Then I should be on the page for "Presidential Race"
+	Then I should be on the article's page
         And I should see "Obama and Romney are running for President"
 
 #Scenario: switch among newslists

@@ -20,8 +20,8 @@ module NavigationHelpers
     when /^the news page&/
       '/index'
 
-    when /^the page for "([^"]*)"$/ do |title|
-      article = Article.find_by_title(title)
+    when /^the page for "(["^])"$/
+      article = Article.find_by_title($1)
       "/#{article[:id]}"
 
     else
