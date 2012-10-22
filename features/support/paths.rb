@@ -17,13 +17,13 @@ module NavigationHelpers
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
 
-    when /^the news page&/
-      '/index'
+    when /^the NewsReader Digest home page$/
+      articles_path
 
-    when /^the page for "([^"]*)"$/ do |title|
-      article = Article.find_by_title(title)
-      "/#{article[:id]}"
-
+    when /^the page for "(.*)"$/
+      article = Article.find_by_title($1)
+      article_path(article)
+    
     else
       begin
         page_name =~ /^the (.*) page$/

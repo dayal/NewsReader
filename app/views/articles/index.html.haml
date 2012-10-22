@@ -1,12 +1,16 @@
-%div.container.header
+%div.container
   %div.row
-    %div.eightcol.logo
-    %div.fourcol.last
-%div.container.midsection
-  %div.row
-    %div.fourcol.imageblock
-      = image_tag ('/assets/music.png')
-    %div.fourcol.imageblock
-      = image_tag ('/assets/tech.png')
-    %div.fourcol.imageblock.last
-      = image_tag ('/assets/gaming.png')
+    %div.span8
+      %div.row
+        %h1 Your News
+        %table#articles
+          %tbody
+            - @articles.each do |article|
+              %tr
+                %td#image= link_to image_tag(Article.extract_img(article.summary)), article_path(article)
+              %tr
+                %td#alink= link_to "#{article.title}", article_path(article)
+    %div.span4.rightbar
+      %div.row
+        = link_to "Sign In", "#", :class => "btn btn-primary btn-large offset"
+        = image_tag ('/assets/emptyprofile.png')
