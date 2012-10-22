@@ -4,8 +4,6 @@ class Feed < ActiveRecord::Base
 
   def self.update_continuously(delay_interval = 15.minutes)
  		Feed.all.each do |feed|
-	    feedzirra_feed = Feedzirra::Feed.fetch_and_parse(feed.feed_url)
-	    add_articles(feedzirra_feed.entries)
 	    loop do
 	      sleep delay_interval
 	      feedzirra_feed = Feedzirra::Feed.update(feedzirra_feed)
