@@ -8,7 +8,8 @@ class Feed < ActiveRecord::Base
 	    loop do
 	      sleep delay_interval
 	      feedzirra_feed = Feedzirra::Feed.update(feedzirra_feed)
-	      add_articles(feedzirra_feed.new_entries) if feedzirra_feed.updated?
+	      #need to change this in the future, Feedzirra::Feed.update somehow returns an empty array
+	      add_articles(feedzirra_feed.new_entries) if feedzirra_feed
 	    end
 	  end
   end
