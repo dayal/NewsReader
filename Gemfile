@@ -10,7 +10,9 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'simplecov'  
   gem 'capybara'
+  gem 'nokogiri'
   gem 'feedzirra'
+  gem 'factory_girl'
 end
 
 group :test do
@@ -20,6 +22,7 @@ end
 
 group :production do
   gem 'pg'
+  gem 'nokogiri'
   gem 'feedzirra'
 end
 

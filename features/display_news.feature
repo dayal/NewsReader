@@ -5,17 +5,15 @@ Feature: Display news from various news networks
 	I want to read news from different networks
 
 Background: news has been added to database
-	
-	# Use FactoryGirls to add a few lists of news to the database
-	Given there are some lists of news in the database
-	And I am on the news page
+  
+  Given I am on the NewsReader Digest home page
 
-Scenario: go to article page
-	Then I should see "Presidential Race"
-	And I should see "Other News"
-	When I follow "Presidential Race"
-	Then I should be on the page for "Presidential Race"
-        And I should see "Obama and Romney are running for President"
+Scenario: go to an article page
+  Then I should see "Refresh Roundup: week of October 15th, 2012"
+  And I should see "Switched On: Sell the hardware, attract the apps"
+  When I follow "Refresh Roundup: week of October 15th, 2012"
+  Then I should be on the page for "Refresh Roundup: week of October 15th, 2012"
+  And I should see "Zachary Lutz"
 
 #Scenario: switch among newslists
 #	When I press "Newslist2"
