@@ -1,47 +1,64 @@
 body {
-  padding: 60px;
-  background: #181818;
-  color: #FFFFFF; !important
+  background-color: rgba(0, 0, 0, 0.1);
+  padding-top: 60px;
+  padding-bottom: 40px;
 }
 
-table#articles td img {
-  width: 100%;
+.overlay img {
+  z-index: 5;
+  opacity: 0;
+}
+
+.overlay a:hover {
+  z-index: 5;
+  background-color: #FFF;
+}
+
+.boxgrid {
+  width: 325px;
   height: 200px;
-}
-
-table#articles {
-  width: 100%;
-  margin: auto;
-}
-
-table#articles a {
-  text-decoration: none;
-  color: white;
-}
-
-table#articles td#image {
-  margin: 0;
-  padding: 20px 0 0 0;
-  width: 200px;
+  margin: 10px;
+  float: left;
+  background: #161613;
+  border: solid 2px #FFF;
   overflow: hidden;
+  position: relative;
 }
 
-table#articles td#alink {
-  margin: 0;
-  padding: 0;
+.boxgrid img {
+  width: 325px;
+  height: 260px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 0;
+}
+
+.feedtitle,
+.boxcaption {
+  float: left;
+  position: absolute;
   background: #000;
+  height: 100px;
+  width: 100%;
+  opacity: .8;
 }
 
-.rightbar {
-  text-align: center;
-  margin: 0 0 0 20px;
+.feedtitle {
+  height: 25px;
+  width: 50%;
+  top: 0;
+  left: 0;
 }
 
-.rightbar img {
-  display: block;
-  float: right;
+.textblock {
+  position: absolute;
+  color: #FFF;
+  top: 6px;
+  left: 5px;
 }
 
-.rightbar .offset {
-  margin: 30px 5px 0px 5px;
+.caption .boxcaption {
+  top: 130px;
+  left: 0;
 }

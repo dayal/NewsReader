@@ -31,7 +31,8 @@ class Feed < ActiveRecord::Base
 	          :content			=> entry.content,
 	          :url          => entry.url,
 	          :published_at => entry.published,
-	          :guid         => entry.id
+	          :guid         => entry.id,
+            :image_url    => Article.extract_img(entry.summary)
 	        )
 	      end
 	    end

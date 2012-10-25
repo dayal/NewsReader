@@ -1,11 +1,7 @@
 %div.container
   %div.row
-    %div.span8
-      %div.row
-        %h2 #{@article.title}
-        %h4 Written by #{@article.author} on #{@article.published_at.strftime("%B %d, %Y")}
-        = @article.summary.html_safe
-    %div.span4.rightbar
-      %div.row
-        = link_to "Sign In", "#", :class => "btn btn-primary btn-large offset"
-        = image_tag ('/assets/emptyprofile.png')
+    %div.span9
+      %h2 #{@article.title}
+      %h4 Written by #{@article.author} on #{@article.published_at.strftime("%B %d, %Y")}
+      = @article.summary.html_safe
+    %div.span3
