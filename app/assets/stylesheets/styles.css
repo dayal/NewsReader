@@ -20,14 +20,14 @@ body {
   margin: 10px;
   float: left;
   background: #161613;
-  border: solid 2px #FFF;
+  border: solid 2px #000;
   overflow: hidden;
   position: relative;
 }
 
 .boxgrid img {
   width: 325px;
-  height: 260px;
+  height: auto;
   position: absolute;
   top: 0;
   left: 0;
