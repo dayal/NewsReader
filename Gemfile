@@ -10,8 +10,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'simplecov'  
   gem 'capybara'
-  gem 'nokogiri'
-  gem 'feedzirra'
   gem 'factory_girl'
 end
 
@@ -22,8 +20,6 @@ end
 
 group :production do
   gem 'pg'
-  gem 'nokogiri'
-  gem 'feedzirra'
 end
 
 # Gems used only for assets and not required
@@ -39,6 +35,10 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'bcrypt-ruby', '3.0.1'
+gem 'nokogiri'
+gem 'feedzirra'
+gem 'haml'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -54,4 +54,3 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
-gem 'haml'
