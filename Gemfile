@@ -38,6 +38,8 @@ gem 'jquery-rails'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'nokogiri'
 gem 'feedzirra'
+gem 'amistad'
+gem "squeel"
 gem 'haml'
 
 # To use ActiveModel has_secure_password
