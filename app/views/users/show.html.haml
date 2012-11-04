@@ -1,0 +1,28 @@
+%div.container
+  %div.row
+    %div.span9
+      %table.table
+        %tr
+          - if current_user?(@user)
+            %td{:colspan => 2}= link_to "Edit Profile", edit_user_path(@user), :class => "pull-right btn"
+          - else
+            - if friend_with?
+              %td{:colspan => 2}= link_to "Delete Friend", friend_path(profile_user), :method => "DELETE", :class => "pull-right btn"
+            - elsif pending_invite?
+              %td{:colspan => 2}
+                %p.pull-right Invitation sent...
+            - elsif pending_request?
+              %td{:colspan => 2}= link_to "Confirm Request", friend_path(profile_user), :method => "put", :class => "pull-right btn"
+            - else
+              %td{:colspan => 2}= link_to "Add Friend", friends_path(:user_id => params[:id]), :method => "POST", :class => "pull-right btn"
+        %tr
+          %td.span2
+            = image_tag ('/assets/emptyprofile.png'), :class => "img-polaroid"
+          %td.span7
+            %table.table
+              %tr
+                %td Name
+                %td= @user.name
+              %tr
+                %td Email
+                %td= @user.email

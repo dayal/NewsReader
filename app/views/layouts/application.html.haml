@@ -10,8 +10,20 @@
     %div.navbar.navbar-inverse.navbar-fixed-top
       %div.navbar-inner
         %div.container
-          = link_to "NewsReader Digest", "/", :class => "brand"
-          %div.pull-right
-            = link_to "Log In", "#", :class => "btn btn-primary"
-            = link_to "Sign Up", "#", :class => "btn btn-primary"
+          = link_to "NEWSREADER DIGEST", "/", :class => "brand"
+          %ul.nav.pull-right
+            - if signed_in?
+              = link_to image_tag('/assets/emptyprofile.png'), current_user, :class => "pictureHeader"
+              %li= link_to current_user.name, current_user 
+              %li= link_to "Log Out", signout_path, :method => "DELETE"
+            - else
+              %li= link_to "Log In", signin_path
+              %li= link_to "Sign Up", signup_path
+    - if flash[:success] or flash[:notice]
+      %div.container
+        %div.row
+          %div.span12
+            %div.alert
+              %strong= flash[:success]
+              %strong= flash[:notice]
     = yield

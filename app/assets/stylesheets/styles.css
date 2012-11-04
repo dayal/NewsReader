@@ -62,3 +62,20 @@ body {
   top: 130px;
   left: 0;
 }
+
+#error_explanation {
+  color: #f00;
+}
+
+#error_explanation ul {
+  list-style: none;
+  margin: 0 0 18px 0;
+}
+
+.pictureHeader {
+  display: block;
+  float: left;
+  height: 30px;
+  width: 30px;
+  margin-top: 5px;
+}

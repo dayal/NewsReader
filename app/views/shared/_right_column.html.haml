@@ -1,0 +1,11 @@
+%div.well
+  - if signed_in?
+    %p Welcome back, #{current_user.name}!
+    - if !pending_requests.empty?
+      %p You have friend requests!
+      %ul
+        - pending_requests.each do |user|
+          %li
+            = user.name
+            = link_to "Confirm?", friend_path(user), :method => "put"
+    %h4 Your NewsLists

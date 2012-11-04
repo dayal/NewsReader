@@ -6,10 +6,7 @@ NewsReader::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
 
-  resources :friends, :controller => 'friendships', :except => [:show, :edit] do
-    get "requests", :on => :collection
-    get "invites", :on => :collection
-  end
+  resources :friends, :controller => 'friendships', :except => [:index, :new, :show, :edit]
 
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'

@@ -1,7 +1,7 @@
 %div.container
   %div.row
     %div.span9
-      - @articles.each_slice(3) do |articles_group|
+      - @articles.take(10).each_slice(2) do |articles_group|
         %div
           - articles_group.each do |article|
             %div.boxgrid.caption
@@ -13,3 +13,4 @@
                     %strong Engadget
                   %p= "#{article.title}"
     %div.span3
+      = render :partial => "shared/right_column"
