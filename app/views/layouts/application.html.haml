@@ -15,9 +15,9 @@
             - if signed_in?
               = link_to image_tag('/assets/emptyprofile.png'), current_user, :class => "pictureHeader"
               %li= link_to current_user.name, current_user 
-              %li= link_to "Log Out", signout_path, :method => "DELETE"
+              %li= link_to "Log Out", signout_path, :method => "DELETE", id: 'log_out'
             - else
-              %li= link_to "Log In", signin_path
+              %li= link_to "Log In", signin_path, id: 'log_in'
               %li= link_to "Sign Up", signup_path
     - if flash[:success] or flash[:notice]
       %div.container
