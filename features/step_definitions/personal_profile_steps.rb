@@ -12,21 +12,30 @@ Given /^(?:|I )am not logged in$/ do
   end
 end
 
-When /^I fill in the Signup form$/ do
+When /^I fill in the .* form$/ do
   fill_in('user_name', :with => 'John Doe')
   fill_in('user_email', :with => 'johndoe@test.com')
   fill_in('user_password', :with => '123456')
   fill_in('user_password_confirmation', :with => '123456')
 end
 
+When /^I safely fill in the .* form$/ do
+  step %Q{
+    Given I am logged in as "user1"
+    And I fill in the edit form
+  }
+end
+
 When /^I fill out the login form with correct information$/ do
   fill_in('session_email', :with => 'myemail@test.com')
   fill_in('session_password', :with => '123456')
+  click_button "Log In"
 end
 
 When /^I fill out the login form with incorrect information$/ do
   fill_in('session_email', :with => 'myemail@test.com')
   fill_in('session_password', :with => '654321')
+  click_button "Log In"
 end
 
 Given /^I am logged in$/ do

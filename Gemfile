@@ -9,12 +9,13 @@ group :development, :test do
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'rspec-rails'
   gem 'simplecov'  
-  gem 'capybara'
+  gem 'capybara', '1.1.3'
   gem 'factory_girl'
+  gem 'rack_session_access'
 end
 
 group :test do
-  gem 'cucumber-rails', '~> 1.0.6'
+  gem 'cucumber-rails'
   gem 'database_cleaner'
 end
 
