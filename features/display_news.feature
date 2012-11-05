@@ -20,3 +20,9 @@ Scenario: go to an article page
   Then I should be on the page for "Test1"
   And I should see "author1"
   And I should not see "author2"
+
+Scenario: go to an article that does not exist
+
+  When I try to go to article that does not exist
+  Then I should be on the NewsReader Digest home page
+  And I should see "That article could not be found"
