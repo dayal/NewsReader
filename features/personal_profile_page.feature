@@ -34,14 +34,14 @@ Scenario: Should not see Friends favorited news section on home page
 
 Scenario: Logging in - user exist
 
-  When I follow "Log In"
+  When I follow "log_in"
   And I fill out the login form with correct information
   Then I should be on the profile page for "user1"
   And I should see "Welcome back, user1!"
 
 Scenario: Logging in - user does not exist
 
-  When I follow "Log In"
+  When I follow "log_in"
   And I fill out the login form with incorrect information
   Then I should be on the login form
   And I should see "Invalid email/password combination"
@@ -56,7 +56,7 @@ Scenario: View another user's profile page
 Scenario: Logging out
 
   Given I am logged in
-  When I follow "Log Out"
+  When I follow "log_out"
   Then I should be on the NewsReader Digest home page
   And I should see "You have logged out successfully."
   And I should see the "Sign Up" button
