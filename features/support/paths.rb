@@ -18,16 +18,16 @@ module NavigationHelpers
     #     user_profile_path(User.find_by_login($1))
 
     when /^the NewsReader Digest home page$/
-      articles_path
+      '/'
 
     when /^the page for "(.*)"$/
       article = Article.find_by_title($1)
       article_path(article)
 
-    when /^profile page for "(.*)"$/
+    when /^the profile page for "(.*)"$/
       user = User.find_by_name($1)
       user_path(user)
-   
+
     else
       begin
         page_name =~ /^the (.*) page$/

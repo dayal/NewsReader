@@ -252,10 +252,3 @@ end
 Then /^show me the page$/ do
   save_and_open_page
 end
-
-# Begin step definitions for NewsReader
-
-Given /^there are some lists of news in the database$/ do
-  @Article1 = FactoryGirl.build(:article, :title => 'Presidential Race', :body => 'Obama and Romney are running for President')
-  @Article2 = FactoryGirl.build(:article, :title => 'Other News', :body => 'There is other news today')
-end
