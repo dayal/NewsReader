@@ -1,11 +1,5 @@
 include SessionsHelper
 
-Given /the following users exist/ do |users_table|
-  users_table.hashes.each do |user|
-    User.create!(user)
-  end
-end
-
 Given /I am logged in as "(.*)"$/ do |e1|
   @user = User.find_by_name(e1)
   visit signin_path
