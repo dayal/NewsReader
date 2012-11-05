@@ -23,7 +23,7 @@ module NavigationHelpers
     when /^the page for "(.*)"$/
       article = Article.find_by_title($1)
       article_path(article)
-    
+
     when /^the profile page for "(.*)"$/
       user = User.find_by_name($1)
       user_path(user)
