@@ -12,7 +12,7 @@ describe FriendshipsHelper do
     it { should respond_to(:password_digest) }
     it { should respond_to(:password) }
     it { should respond_to(:password_confirmation) }
-    it { should respond_to(:authentication) }
+    it { should respond_to(:authenticate) }
 
 
     describe "when name is not present" do
