@@ -20,13 +20,13 @@ describe Feed do
 		  feedzirra_feed = Feedzirra::Feed.fetch_and_parse(@feed.feed_url)
 			Feed.add_articles(feedzirra_feed.entries)
 			entry = feedzirra_feed.entries.first
-			Article.first.title.should == entry.title
-			Article.first.author.should == entry.author
-			Article.first.summary.should == entry.summary
-			Article.first.content.should == entry.content
-			Article.first.url.should == entry.url
-			Article.first.published_at.should == entry.published
-			Article.first.guid.should == entry.id
+			article = Article.find(:all, conditions: {title: entry.title}).first
+			article.author.should == entry.author
+			article.summary.should == entry.summary
+			article.content.should == entry.content
+			article.url.should == entry.url
+			article.published_at.should == entry.published
+			article.guid.should == entry.id
 		end
 	end
 end
