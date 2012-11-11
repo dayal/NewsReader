@@ -3,10 +3,14 @@
     %div.span9
       %table.table
         %tr
-          %td.span2
-            = image_tag ('/assets/emptyprofile.png'), :class => "img-polaroid"
-          %td.span7
-            = form_for(@user) do |f|
+          = form_for @user, :html => { :multipart => true } do |f|
+            %td.span2
+              -if not @user.avatar.present?
+                = image_tag ('/assets/emptyprofile.png'), :class => "img-polaroid" 
+              -else
+                = image_tag @user.avatar.url(:medium) 
+              = f.file_field :avatar
+            %td.span7
               = render :partial => "shared/signup_errors"
               = render :partial => "signup_edit_form", :locals => { :f => f }
               %p= f.submit "Save Changes", :class => "pull-right btn btn-inverse"
