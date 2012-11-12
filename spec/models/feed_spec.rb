@@ -18,7 +18,7 @@ describe Feed do
 	describe 'add articles' do
 		it 'should create Article entries for each item in the input unless an entry for that article already exists' do
 		  feedzirra_feed = Feedzirra::Feed.fetch_and_parse(@feed.feed_url)
-			Feed.add_articles(feedzirra_feed.entries)
+			Feed.add_articles(feedzirra_feed.entries, @feed)
 			entry = feedzirra_feed.entries.first
 			article = Article.find(:all, conditions: {title: entry.title}).first
 			article.author.should == entry.author

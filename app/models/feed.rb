@@ -1,7 +1,7 @@
 class Feed < ActiveRecord::Base
 	require 'feedzirra'
   attr_accessible :feed_url, :name
-  after_save :add_article, :create_name
+  after_create :add_article, :create_name
   has_many :articles
 
   def self.update_all
@@ -33,12 +33,12 @@ class Feed < ActiveRecord::Base
 
 	  def add_article
 	  	feedzirra_feed = Feedzirra::Feed.fetch_and_parse(self.feed_url)
-		  Feed.add_articles(feedzirra_feed.entries, self)
+	  	Feed.add_articles(feedzirra_feed.entries, self) unless feedzirra_feed == 0
 	 	end
 
 	 	def create_name
 	 		feedzirra_feed = Feedzirra::Feed.fetch_and_parse(self.feed_url)
-	 		self.update_attributes(name: feedzirra_feed.title)
+	 		self.update_attributes(name: feedzirra_feed.title) unless feedzirra_feed == 0
 	 	end
 
 	  def self.add_articles(entries, feed)
