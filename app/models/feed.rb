@@ -1,7 +1,21 @@
 class Feed < ActiveRecord::Base
+	require 'feedzirra'
   attr_accessible :feed_url, :name
   after_save :add_article, :create_name
   has_many :articles
+
+  def self.update_all
+  	Feed.all.each do |feed|
+ 			feedzirra_feed = Feedzirra::Feed.fetch_and_parse(feed.feed_url)
+ 			add_articles(feedzirra_feed.entries, feed)
+ 		end
+  end
+
+=begin
+   
+  There is currently a bug with Feedzirra::Feed.update, so we are using a workaround right now
+  which is less efficient but at least working.
+  https://groups.google.com/forum/?fromgroups=#!topic/feedzirra/mSTpyDlTCpg
 
   def self.update_continuously(delay_interval = 15.minutes)
  		Feed.all.each do |feed|
@@ -9,12 +23,12 @@ class Feed < ActiveRecord::Base
 	    loop do
 	      sleep delay_interval
 	      feedzirra_feed = Feedzirra::Feed.update(feedzirra_feed)
-	      #need to change this in the future, Feedzirra::Feed.update somehow returns an empty array
-	      add_articles(feedzirra_feed.new_entries, feed) if feedzirra_feed
+	      add_articles(feedzirra_feed.new_entries, feed) if feedzirra_feed.updated
 	    end
 	  end
   end
-  
+=end
+
   private
 
 	  def add_article
