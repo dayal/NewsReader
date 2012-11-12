@@ -19,14 +19,14 @@ class Feed < ActiveRecord::Base
 
 	  def add_article
 	  	feedzirra_feed = Feedzirra::Feed.fetch_and_parse(self.feed_url)
-		  Feed.add_articles(feedzirra_feed.entries, this)
+		  Feed.add_articles(feedzirra_feed.entries, self)
 	 	end
 
 	  def self.add_articles(entries, feed)
 	    entries.each do |entry|
 	      unless Article.find_by_guid(entry.id)
 	        Article.create!(
-	        	:feed_id			=> feed.id
+	        	:feed_id			=> feed.id,
 	          :title        => entry.title,
 	          :author				=> entry.author,
 	          :summary      => entry.summary,
