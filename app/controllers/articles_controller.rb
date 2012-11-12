@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController	
     def index
-      @articles = Article.all
+      @articles = Article.find(:all, order: "published_at DESC")
     end
 
     def show 
