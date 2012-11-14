@@ -1,13 +1,5 @@
 class FriendshipsController < ApplicationController
   before_filter :signed_in_user
-  
-  def index
-    @friends = current_user.friends
-  end
-
-  def new
-    @users = User.all :conditions => ["id != ?", current_user.id]
-  end
 
   def create
     invitee = User.find_by_id(params[:user_id])
