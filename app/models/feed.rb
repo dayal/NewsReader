@@ -3,6 +3,7 @@ class Feed < ActiveRecord::Base
   attr_accessible :feed_url, :name
   after_create :add_article, :create_name
   has_many :articles
+  has_and_belongs_to_many :news_lists
 
   def self.update_all
   	Feed.all.each do |feed|

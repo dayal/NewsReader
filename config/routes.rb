@@ -3,7 +3,12 @@ NewsReader::Application.routes.draw do
   
   root :to => "articles#index"
 
-  resources :users
+  resources :users do
+    resources :news_lists do
+      get 'add_feed', :on => :member
+      get 'remove_feed', :on => :member
+    end
+  end
   resources :sessions, only: [:new, :create, :destroy]
 
   resources :friends, :controller => 'friendships', :except => [:index, :new, :show, :edit]
