@@ -22,7 +22,7 @@ class NewsListsController < ApplicationController
   	@news_list = NewsList.new(params[:news_list])
   	if @news_list.save
   		redirect_to @news_list
-  		flash[:success] = "PNews list created"
+  		flash[:success] = "News list created"
   	else
   		render 'new'
   	end
