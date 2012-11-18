@@ -4,7 +4,9 @@
       %table.table
         %tr
           - if current_user?(@user)
-            %td{:colspan => 2}= link_to "Edit Profile", edit_user_path(@user), :class => "pull-right btn"
+            %td{:colspan => 2}
+              = link_to "Edit Profile", edit_user_path(@user), :class => "pull-right btn"
+              = link_to "Create NewsList", new_user_news_list_path(@user), :class => "pull-right btn"
           - else
             - if friend_with?
               %td{:colspan => 2}= link_to "Delete Friend", friend_path(profile_user), :method => "DELETE", :class => "pull-right btn"
