@@ -11,6 +11,11 @@ class NewsListsController < ApplicationController
   	@user = User.find(params[:user_id])
   	@news_list = NewsList.find(params[:id])
   	@feeds = @news_list.feeds
+    @articles = []
+    @feeds.each do |feed|
+      @articles << feed.articles
+    end
+    @articles.sort_by{|article| article[:published_at]}
   end
 
   def new
@@ -22,7 +27,7 @@ class NewsListsController < ApplicationController
   	@news_list = NewsList.new(params[:news_list])
   	if @news_list.save
   		redirect_to @news_list
-  		flash[:success] = "PNews list created"
+  		flash[:success] = "News list created"
   	else
   		render 'new'
   	end
@@ -46,7 +51,7 @@ class NewsListsController < ApplicationController
   	@news_list.delete
   end
 
-  def add_feed
+  def add_feed_from_url
   	@feed = Feed.find_by_url(params[:feed_url])
   	if @feed
   		@news_list.feeds << @feed
@@ -55,6 +60,17 @@ class NewsListsController < ApplicationController
   		@news_list.feeds << @feed
   	end
   	render 'show'
+  end
+
+  def add_feeds
+    @feed = Feed.find_by_url(params[:feed_url])
+    if @feed
+      @news_list.feeds << @feed
+    else
+      @feed = Feed.create(feed_url: params[:feed_url])
+      @news_list.feeds << @feed
+    end
+    render 'show'
   end
 
   def remove_feed
