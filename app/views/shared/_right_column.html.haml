@@ -8,4 +8,8 @@
           %li
             = user.name
             = link_to "Confirm?", friend_path(user), :method => "put"
-    %h4 Your NewsLists
+    - if !current_user.news_lists.empty?
+      %h4 Your NewsLists
+      %ul
+        - current_user.news_lists.each do |newslist|
+          %li= link_to newlist.name, user_news_lists_path(newslist)
