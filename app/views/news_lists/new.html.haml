@@ -1,0 +1,9 @@
+%div.container
+  %div.row
+    %div.span9
+      = form_for(@news_list, :url => user_news_lists_path(@user), :html => { :class => "offset1 span6" }) do |f|
+        = render :partial => "newslist_errors"
+        = render :partial => "newslist_form", :locals => { :f => f }
+        %p= f.submit "Create NewsList", :class => "pull-right btn btn-inverse"
+    %div.span3
+      = render :partial => "shared/right_column"

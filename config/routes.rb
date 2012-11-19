@@ -5,8 +5,11 @@ NewsReader::Application.routes.draw do
 
   resources :users do
     resources :news_lists do
-      get 'add_feed', :on => :member
       get 'remove_feed', :on => :member
+    end
+    resources :favorite_lists, only: [:show] do
+      get 'add_articles', :on => :member
+      get 'remove_articles', :on => :member
     end
   end
   resources :sessions, only: [:new, :create, :destroy]
@@ -73,3 +76,4 @@ NewsReader::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 end
+

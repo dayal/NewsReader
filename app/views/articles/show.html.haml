@@ -3,6 +3,9 @@
     %div.span9
       %h2 #{@article.title}
       %h4 Written by #{@article.author} on #{@article.published_at.strftime("%B %d, %Y")}
-      = @article.summary.html_safe
+      - if !@article.summary.nil?
+        = @article.summary.html_safe
+      - elsif !@article.content.nil?
+        = @article.content.html_safe
     %div.span3
       = render :partial => "shared/right_column"
