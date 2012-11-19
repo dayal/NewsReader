@@ -16,12 +16,14 @@ class NewsListsController < ApplicationController
     else
   	  @feeds = @news_list.feeds
       @articles = []
-      @feeds.each do |feed|
-        feed.articles.each do |article|
-          @articles << article
+      if @feeds
+        @feeds.each do |feed|
+          feed.articles.each do |article|
+            @articles << article
+          end
         end
+        @articles.sort! { |a, b|  a.published_at <=> b.published_at }
       end
-      @articles.sort! { |a, b|  a.published_at <=> b.published_at }
     end
   end
 
