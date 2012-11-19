@@ -4,4 +4,5 @@ class NewsList < ActiveRecord::Base
   attr_accessor :feeds_url
 
   validates :user_id, presence: true
+  validates :name, presence: true
 end
