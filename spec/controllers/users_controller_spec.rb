@@ -14,9 +14,15 @@ describe UsersController do
 	end
 	describe 'new user' do
 		it 'should display the user signup page'  do
-			#fake_result = mock('user', :name => 'example', :email => 'example@yahoo.com', :password => 'dddddd', :password_confirmation => 'dddddd')
 			User.should_receive(:new)
 			get :new
+		end
+	end
+	describe 'update user profile' do
+		it 'should call update_attributes'  do
+			#User.should_receive(:update_attributes)
+			post :update, {id: @user.id}
+			assert_response :success
 		end
 	end
 end

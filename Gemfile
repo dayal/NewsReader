@@ -12,6 +12,7 @@ group :development, :test do
   gem 'capybara', '1.1.3'
   gem 'factory_girl'
   gem 'rack_session_access'
+  gem 'assert_difference'
 end
 
 group :test do
