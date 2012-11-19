@@ -13,7 +13,9 @@ class NewsListsController < ApplicationController
   	@feeds = @news_list.feeds
     @articles = []
     @feeds.each do |feed|
-      @articles << feed.articles
+      feed.articles.each do |article|
+        @articles << article
+      end
     end
     @articles.sort! { |a, b|  a.published_at <=> b.published_at }
   end
@@ -21,6 +23,7 @@ class NewsListsController < ApplicationController
   def new
   	@user = User.find(params[:user_id])
   	@news_list = NewsList.new
+    @feeds = Feed.all
   end
 
   def create
@@ -50,6 +53,7 @@ class NewsListsController < ApplicationController
   def edit
     @user = User.find(params[:user_id])
   	@news_list = NewsList.find(params[:id])
+    @feeds = Feed.all - @news_list.feeds
   end
 
   def update
@@ -83,7 +87,8 @@ class NewsListsController < ApplicationController
   def remove_feed
     @news_list = NewsList.find(params[:id])
     @feed = Feed.find(params[:feed_id])
-    @news_list.delete(@feed)
+    @news_list.feeds.delete(@feed)
+    flash[:success] = "Successfully deleted #{@feed.name} from your NewsList"
     redirect_to edit_user_news_list_path(@user, @news_list)
   end
 
