@@ -1,6 +1,6 @@
 class NewsListsController < ApplicationController
   before_filter :signed_in_user
-  before_filter :correct_user,   only: [:create, :edit, :update, :destroy, :add_feed, :remove_feed]
+  before_filter :correct_user,   only: [:create, :edit, :update, :destroy, :remove_feed]
 
   def index
   	@user = User.find(params[:user_id])
@@ -78,6 +78,13 @@ class NewsListsController < ApplicationController
   def destroy
   	@news_list = NewsList.find(params[:id])
   	@news_list.delete
+  end
+
+  def remove_feed
+    @news_list = NewsList.find(params[:id])
+    @feed = Feed.find(params[:feed_id])
+    @news_list.delete(@feed)
+    redirect_to edit_user_news_list_path(@user, @news_list)
   end
 
   private
