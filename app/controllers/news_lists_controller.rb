@@ -24,7 +24,7 @@ class NewsListsController < ApplicationController
   end
 
   def create
-  	@news_list = NewsList.new(params[:news_list])
+  	@news_list = NewsList.new(params[:news_list][:feeds])
   	if @news_list.save
   		redirect_to @news_list
   		flash[:success] = "News list created"
