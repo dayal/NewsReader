@@ -17,11 +17,7 @@ Background: Users in database
 
 Scenario: Creating a NewsList
 
-<<<<<<< HEAD
   When I safely follow "Create NewsList"
-=======
-  Then I follow "Create NewsList"
->>>>>>> 6ab24b91dd595d54e4818dcb0353ca6d7e6ae97e
   Then I should be on the create NewsList page
   And I should see "Available Feeds"				#or whatever we're gonna call the feeds available for adding to newslists
   When I fill in "Name" with "Technology"

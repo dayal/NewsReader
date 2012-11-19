@@ -9,3 +9,9 @@ end
 When /I try to go to article that does not exist/ do
   visit "/articles/12332"
 end
+
+Given /^I added "(.*)" to my favorite articles$/ do |article|
+  step %Q{I am on the page of article named "#{article}"}
+  step %Q{I safely follow "Add to Favorite"}
+end
+

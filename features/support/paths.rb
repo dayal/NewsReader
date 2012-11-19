@@ -20,8 +20,8 @@ module NavigationHelpers
     when /^the NewsReader Digest home page$/
       '/'
 
-    when /^the page for "(.*)"$/
-      article = Article.find_by_title($1)
+    when /^the page of article named "(.*)"$/
+      article = Article.find_by_title("#{$1}")
       article_path(article)
 
     when /^the profile page for "(.*)"$/

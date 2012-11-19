@@ -35,3 +35,11 @@ When /I safely follow "(.*)"$/ do |e1|
     And I follow "#{e1}"
   }
 end
+
+Given /^I am friends with "(.*?)"$/ do |arg1|
+  step %Q{I am logged in as "user1"}
+  step %Q{I safely go to profile page for "#{arg1}"}
+  step %Q{I should safely see "Add Friend"}
+  step %Q{I safely follow "Add Friend"}
+end
+
