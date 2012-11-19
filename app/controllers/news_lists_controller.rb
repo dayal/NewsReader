@@ -1,6 +1,6 @@
 class NewsListsController < ApplicationController
   before_filter :signed_in_user
-  before_filter :correct_user,   only: [:edit, :update, :destroy, :add_feed, :remove_feed]
+  before_filter :correct_user,   only: [:create, :edit, :update, :destroy, :add_feed, :remove_feed]
 
   def index
   	@user = User.find(params[:user_id])
@@ -24,9 +24,14 @@ class NewsListsController < ApplicationController
   end
 
   def create
-  	@news_list = NewsList.new(params[:news_list][:feeds])
+  	@news_list = NewsList.new(name: params[:news_list][:name])
+    @user.news_lists << @news_list
   	if @news_list.save
-  		redirect_to @news_list
+      params[:news_list][:feeds][1..-1].each do |feed_id|
+        @feed = Feed.find(feed_id)
+        @news_list.feeds << @feed if @feed
+      end
+  		redirect_to @user
   		flash[:success] = "News list created"
   	else
   		render 'new'
