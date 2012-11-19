@@ -17,7 +17,7 @@ Scenario: go to an article page
   Then I should see "Test1"
   And I should see "Test2"
   When I follow "Test1"
-  Then I should be on the page for "Test1"
+  Then I should be on the page of article named "Test1"
   And I should see "author1"
   And I should not see "author2"
 

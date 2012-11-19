@@ -52,7 +52,6 @@ Scenario: Logging in - user exist
   And I fill out the login form with correct information
   Then I should be on the profile page for "user1"
   And I should see "Welcome back, user1!"
-  And I should see "Your NewsLists"
 
 Scenario: Logging in - user does not exist
 
