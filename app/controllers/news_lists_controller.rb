@@ -15,7 +15,7 @@ class NewsListsController < ApplicationController
     @feeds.each do |feed|
       @articles << feed.articles
     end
-    @articles.sort_by{|article| article[:published_at]}
+    @articles.sort! { |a, b|  a.published_at <=> b.published_at }
   end
 
   def new
