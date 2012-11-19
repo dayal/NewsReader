@@ -4,7 +4,7 @@ NewsReader::Application.routes.draw do
   root :to => "articles#index"
 
   resources :users do
-    resources :news_lists
+    resources :news_lists, :except => [:index]
     resources :favorite_lists, only: [:show] do
       get 'add_articles', :on => :member
       get 'remove_articles', :on => :member

@@ -12,4 +12,4 @@
       %h4 Your NewsLists
       %ul
         - current_user.news_lists.each do |newslist|
-          %li= link_to newlist.name, user_news_lists_path(newslist)
+          %li= link_to newslist.name, user_news_list_path(current_user, newslist)

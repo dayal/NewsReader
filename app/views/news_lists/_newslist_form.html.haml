@@ -6,3 +6,7 @@
 
 = f.label :feeds_url
 = f.text_field :feeds_url, :class => "input-block-level"
+
+= f.label :is_private, :class => "checkbox" do
+  Make Private?
+  = f.check_box :is_private, :class => "checkbox"
