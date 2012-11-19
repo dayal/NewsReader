@@ -9,7 +9,7 @@ NewsReader::Application.routes.draw do
       get 'add_feed_by_url', :on => :member
       get 'remove_feed', :on => :member
     end
-    resourses :favorite_lists, only: [:show] do
+    resources :favorite_lists, only: [:show] do
       get 'add_articles', :on => :member
       get 'remove_articles', :on => :member
     end
