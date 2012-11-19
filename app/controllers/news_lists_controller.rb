@@ -39,13 +39,19 @@ class NewsListsController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:user_id])
   	@news_list = NewsList.find(params[:id])
   end
 
   def update
-  	if @news_list.update_attributes(params[:news_list])
+    @news_list = NewsList.find(params[:id])
+  	if @news_list.update_attributes(name: params[:news_list][:name])
+      params[:news_list][:feeds][1..-1].each do |feed_id|
+        @feed = Feed.find(feed_id)
+        @news_list.feeds << @feed if @feed
+      end
   		flash[:success] = "News list updated"
-  		redirect_to @news_list
+  		redirect_to @user
   	else
   		render 'edit'
   	end
@@ -54,36 +60,6 @@ class NewsListsController < ApplicationController
   def destroy
   	@news_list = NewsList.find(params[:id])
   	@news_list.delete
-  end
-
-  def add_feed_from_url
-  	@feed = Feed.find_by_url(params[:feed_url])
-  	if @feed
-  		@news_list.feeds << @feed
-  	else
-  		@feed = Feed.create(feed_url: params[:feed_url])
-  		@news_list.feeds << @feed
-  	end
-  	render 'show'
-  end
-
-  def add_feeds
-    @feed = Feed.find_by_url(params[:feed_url])
-    if @feed
-      @news_list.feeds << @feed
-    else
-      @feed = Feed.create(feed_url: params[:feed_url])
-      @news_list.feeds << @feed
-    end
-    render 'show'
-  end
-
-  def remove_feed
-  	@feed = Feed.find_by_url(params[:feed_url])
-  	if @feed
-  		@news_list.feeds.delete(@feed)
-  	end
-  	render 'show'
   end
 
   private

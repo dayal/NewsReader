@@ -4,11 +4,7 @@ NewsReader::Application.routes.draw do
   root :to => "articles#index"
 
   resources :users do
-    resources :news_lists do
-      get 'add_feeds', :on => :member
-      get 'add_feed_by_url', :on => :member
-      get 'remove_feed', :on => :member
-    end
+    resources :news_lists
     resources :favorite_lists, only: [:show] do
       get 'add_articles', :on => :member
       get 'remove_articles', :on => :member
