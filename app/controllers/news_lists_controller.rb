@@ -33,8 +33,12 @@ class NewsListsController < ApplicationController
       end
       feeds_url = params[:news_list][:feeds_url]
       if feeds_url != ""
-        @feed = Feed.find_by_url(feeds_url)
-        @news_list.feeds << (@feed || Feed.create(feed_url: feeds_url))
+        @feed = Feed.find_by_feed_url(feeds_url)
+        if @feed
+          @news_list.feeds << @feed
+        else
+          @news_list.feeds << Feed.create(feed_url: feeds_url)
+        end
       end
   		redirect_to @user
   		flash[:success] = "News list created"
@@ -57,8 +61,12 @@ class NewsListsController < ApplicationController
       end
       feeds_url = params[:news_list][:feeds_url]
       if feeds_url != ""
-        @feed = Feed.find_by_url(feeds_url)
-        @news_list.feeds << (@feed || Feed.create(feed_url: feeds_url))
+        @feed = Feed.find_by_feed_url(feeds_url)
+        if @feed
+          @news_list.feeds << @feed
+        else
+          @news_list.feeds << Feed.create(feed_url: feeds_url)
+        end
       end
   		flash[:success] = "News list updated"
   		redirect_to @user
