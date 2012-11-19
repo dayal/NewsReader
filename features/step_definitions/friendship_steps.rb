@@ -29,6 +29,13 @@ When /I should safely see "(.*)"$/ do |e1|
   }
 end
 
+When /I should safely not see "(.*)"$/ do |e1|
+  step %Q{
+    Given I am logged in as "#{@user.name}"
+    Then I should not see "#{e1}"
+  }
+end
+
 When /I safely follow "(.*)"$/ do |e1|
   step %Q{
     Given I am logged in as "#{@user.name}"
@@ -43,3 +50,16 @@ Given /^I am friends with "(.*?)"$/ do |arg1|
   step %Q{I safely follow "Add Friend"}
 end
 
+When /I safely fill in "(.*)" with "(.*)"$/ do |e1, e2|
+  step %Q{
+    Given I am logged in as "#{@user.name}"
+    When I fill in "#{e1}" with "#{e2}"
+  }
+end
+
+When /I safely select "(.*)" from "(.*)"$/ do |e1, e2|
+  step %Q{
+    Given I am logged in as "#{@user.name}"
+    When I select "#{e1}" from "#{e2}"
+  }
+end

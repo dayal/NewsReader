@@ -1,7 +1,7 @@
 = f.label :name
 = f.text_field :name, :class => "input-block-level"
 
-= f.label :feeds
+= f.label :feeds, "Available Feeds"
 = f.select :feeds, options_from_collection_for_select(@feeds, "id", "name"), { :include_blank => "None" }, { :multiple => true, :class => "input-block-level"}
 
 = f.label :feeds_url

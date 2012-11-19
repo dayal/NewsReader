@@ -51,8 +51,9 @@ class NewsListsController < ApplicationController
         end
       end
   		redirect_to @user
-  		flash[:success] = "News list created"
+  		flash[:success] = "Successfulled created NewsList"
   	else
+      @feeds = Feed.all
   		render 'new'
   	end
   end
@@ -79,9 +80,10 @@ class NewsListsController < ApplicationController
           @news_list.feeds << Feed.create(feed_url: feeds_url)
         end
       end
-  		flash[:success] = "News list updated"
+  		flash[:success] = "Successfully updated NewsList"
   		redirect_to @user
   	else
+      @feeds = Feed.all - @news_list.feeds
   		render 'edit'
   	end
   end
