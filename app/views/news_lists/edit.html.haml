@@ -1,0 +1,16 @@
+%div.container
+  %div.row
+    %div.span9
+      - if !@news_list.feeds.empty?
+        %div.offset1.span5.well
+          %h5 Current feeds in your NewsList
+            - @news_list.feeds.each do |feed|
+              %p
+                = feed.name
+                = link_to remove_users
+      = form_for(@news_list, :url => user_news_list_path(@user), :html => { :class => "offset1 span6" }) do |f|
+        = render :partial => "newslist_errors"
+        = render :partial => "newslist_form", :locals => { :f => f }
+        %p= f.submit "Save Changes", :class => "pull-right btn btn-inverse"
+    %div.span3
+      = render :partial => "shared/right_column"
