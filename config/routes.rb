@@ -8,8 +8,8 @@ NewsReader::Application.routes.draw do
       get 'remove_feed', :on => :member
     end
     resources :favorite_lists, only: [:show] do
-      get 'add_articles', :on => :member
-      get 'remove_articles', :on => :member
+      get 'add_article', :on => :member
+      get 'remove_article', :on => :member
     end
   end
   resources :sessions, only: [:new, :create, :destroy]

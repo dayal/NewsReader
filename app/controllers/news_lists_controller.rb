@@ -10,14 +10,19 @@ class NewsListsController < ApplicationController
   def show
   	@user = User.find(params[:user_id])
   	@news_list = NewsList.find(params[:id])
-  	@feeds = @news_list.feeds
-    @articles = []
-    @feeds.each do |feed|
-      feed.articles.each do |article|
-        @articles << article
+    if @news_list.is_private and !current_user?(@user)
+      flash[:notice] = "You are trying to access a private newslist"
+      redirect_to root_path
+    else
+  	  @feeds = @news_list.feeds
+      @articles = []
+      @feeds.each do |feed|
+        feed.articles.each do |article|
+          @articles << article
+        end
       end
+      @articles.sort! { |a, b|  a.published_at <=> b.published_at }
     end
-    @articles.sort! { |a, b|  a.published_at <=> b.published_at }
   end
 
   def new
@@ -27,7 +32,7 @@ class NewsListsController < ApplicationController
   end
 
   def create
-  	@news_list = NewsList.new(name: params[:news_list][:name])
+  	@news_list = NewsList.new(name: params[:news_list][:name], is_private: params[:news_list][:is_private])
     @user.news_lists << @news_list
   	if @news_list.save
       params[:news_list][:feeds][1..-1].each do |feed_id|
@@ -82,6 +87,8 @@ class NewsListsController < ApplicationController
   def destroy
   	@news_list = NewsList.find(params[:id])
   	@news_list.delete
+    flash[:success] = "Successfully deleted '#{@news_list.name}' NewsList"
+    redirect_to @user
   end
 
   def remove_feed

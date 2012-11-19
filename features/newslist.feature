@@ -17,7 +17,7 @@ Background: Users in database
 
 Scenario: Creating a NewsList
 
-  When I follow "Create NewsList"
+  When I safely follow "Create NewsList"
   Then I should be on the create NewsList page
   And I should see "Available Feeds"				#or whatever we're gonna call the feeds available for adding to newslists
   When I fill in "Name" with "Technology"

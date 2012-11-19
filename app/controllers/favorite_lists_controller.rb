@@ -1,4 +1,4 @@
-class FavoriteListsController < ActionController::Base
+class FavoriteListsController < ApplicationController
 	before_filter :signed_in_user
 
 	def show
@@ -8,11 +8,11 @@ class FavoriteListsController < ActionController::Base
 
 	def add_article
 		@user = User.find(params[:user_id])
-		@article = Article.find(params[:article_id])
+		@article = Article.find(params[:id])
 		if @article
-			@user.favorite_list << @article
+			@user.favorite_list.articles << @article
 			flash[:success] = "Article added to favorite list."
-			redirect_to @article
+			redirect_to request.referrer
 		else
 			render 'show'
 		end
@@ -20,11 +20,11 @@ class FavoriteListsController < ActionController::Base
 
 	def remove_article
 		@user = User.find(params[:user_id])
-		@article = Article.find(params[:article_id])
+		@article = Article.find(params[:id])
 		if @article
-			@user.favorite_list.delete(@article)
+			@user.favorite_list.articles.delete(@article)
 			flash[:success] = "Article removed from favorite list."
-			redirect_to @user
+			redirect_to request.referrer
 		else
 			render 'show'
 		end
