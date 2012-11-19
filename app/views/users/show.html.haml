@@ -31,14 +31,14 @@
               %tr
                 %td Email
                 %td= @user.email
-              - if !current_user.news_lists.empty?
+              - if !@user.news_lists.empty?
                 %tr
                 %td{:colspan => 2}
                   %h5 NewsLists
                   %ul
-                    - current_user.news_lists.each do |newslist|
+                    - @user.news_lists.each do |newslist|
                       - if !newslist.is_private
-                        %li= link_to newslist.name, user_news_list_path(newslist)
+                        %li= link_to newslist.name, user_news_list_path(@user, newslist)
               - if !@user.favorite_list.articles.empty?
                 %tr
                 %td{:colspan => 2}

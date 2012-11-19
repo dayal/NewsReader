@@ -11,84 +11,71 @@ Background: Users in database
   | user1 | myemail@test.com   | 123456   | 123456                |
   | user2 | youremail@test.com | 123456   | 123456                |
 
-  And I am logged in
+  And I am logged in as "user1"
   And I am on the profile page for "user1"
   #Create fake Feeds (Engadget, Wired)
 
 Scenario: Creating a NewsList
 
-<<<<<<< HEAD
   When I safely follow "Create NewsList"
-=======
-  Then I follow "Create NewsList"
->>>>>>> 6ab24b91dd595d54e4818dcb0353ca6d7e6ae97e
-  Then I should be on the create NewsList page
-  And I should see "Available Feeds"				#or whatever we're gonna call the feeds available for adding to newslists
-  When I fill in "Name" with "Technology"
-  And I add "Engadget" to "Feeds"				#implent/specify wording after figuring out how feeds are added to newslists
-  And I push "Create"
-  Then I should be on my user profile page
-  And I should see "NewsList successfully created."
-  And I should see "Technology"	in the "Your NewsLists" box
+  When I safely fill in "Name" with "Technology"
+  And I safely select "Engadget" from "Available Feeds"
+  And I safely follow "Create NewsList"
+  Then I should safely see "Successfully created NewsList"
+  And I should safely see "Technology"
 
 Scenario: Creating a NewsList sadpath: no name
 
-  When I follow "Create NewsList"
-  And I add "Engadget" to "Feeds"
-  And I push "Create"
-  Then I should see "NewsLists must be named."
-
-Scenario: Creating a NewsList sadpath: no feeds
-
-  When I follow "Create NewsList"
-  And I fill in "Name" with "Technology"
-  And I push "Create"
-  Then I should see "NewsLists must have at least one feed."
+  When I safely follow "Create NewsList"
+  And I safely select "Engadget" from "Available Feeds"
+  And I safely follow "Create NewsList"
+  Then I should safely see "Name can't be blank"
 
 Scenario: Editing a NewsList
 
-  Given I have a "Technology" NewsList
-  And I follow "Edit NewsList" for the "Technology" NewsList
-  Then I should be on the edit NewsList page for "Technology"
-  When I add "Wired" to "Feeds"					#implent/specify wording after figuring out how feeds are added to newslists
-  And I fill in "Name" with "Tech"
-  And I push "Save Changes"
-  Then I should be on the NewsList page for "Tech"		#should this count for checking that the NewsList was renamed?
-  And I should see "Changes saved."
-  And I should see "Wired" in the "Feeds" box 
-  
+  When I safely go to the edit page for "Technology"
+  And I safely select "Wired Top Stories" from "Available Feeds"
+  And I safely follow "Save Changes"
+  Then I should safely see "Successfully updated NewsList"
+
 Scenario: Editing a NewsList sadpath: no name/feeds
 
-  Given I have a "Technology" NewsList
-  And I am on the edit NewsList page for "Technology"
-  When I fill in "Name" with ""
-  And I remove "Engadget" from "Feeds"				#implent/specify wording after figuring out how feeds are added to newslists
-  And I push "Save Changes"
-  Then I should see "NewsLists must be named."
-  And I should see "NewsLists must have at least one feed."
+  When I safely go to the edit page for "Technology"
+  And I safely fill in "Name" with ""
+  And I safely follow "Save Changes"
+  Then I should safely see "Name can't be blank"
 
 Scenario: Privating a NewsList
 
-  Given I have a "Technology" NewsList
-  And I am on the edit NewsList page for "Technology"
-  When I check "Make Private"
-  And I push "Save Changes"
-  And I go to my user profile page
-  Then I should see "Private NewsLists"
-  And I should see "Technology" under "Private NewsLists"
+  When I safely go to the edit page for "Technology"
+  And I safely check "Make Private?"
+  And I safely follow "Save Changes"
+  Then I should safely see "Successfully updated NewsList"
+  Given I am logged in as "user2"
+  And I safely go to profile page for "user1"
+  Then I should safely not see "Technology"
 
-Scenario: Viewing a friend's NewsList
+Scenario: Unprivating a NewsList
 
-  Given I have a "Technology" NewsList				#user1 will have the technology newslist
-  And I am friends with "user2"
-  And I am logged in as "user2"
-  And I go to the profile page for "user1"
-  Then I should see "Technology"
+  Given I am logged in as "user1"
+  When I safely go to the edit page for "Technology"
+  And I safely uncheck "Make Private?"
+  And I safely follow "Save Changes"
+  Then I should safely see "Successfully updated NewsList"
+  Given I am logged in as "user2"
+  And I safely go to profile page for "user1"
+  Then I should safely see "Technology"
+
+Scenario: Viewing another user's newslist
+
+  Given I am logged in as "user2"
+  And I safely go to profile page for "user1"
+  And I safely follow "Technology"
+  Then I should safely be on the show page for "Technology"
 
 Scenario: Attempting to view a friend's private NewsList
 
-  Given I have a "Technology" NewsList that is private		#user1 will have the technology newslist
-  And I am friends with "user2"
-  And I am logged in as "user2"
-  And I go to the profile page for "user1"
-  Then I should not see "Technology"
+  Given I am logged in as "user1"
+  And I make "Technology" private
+  Then I am logged in as "user2"
+
