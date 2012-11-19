@@ -5,7 +5,7 @@ When /I safely go to the edit page for "(.*)"$/ do |e1|
   }
 end
 
-When /I should safely be on the show page for "(.*)"$/ do |e1|
+When /I .* safely .* the show page for "(.*)"$/ do |e1|
   step %Q{
     Given I am logged in as "#{@user.name}"
     And I go to the show page for "#{e1}"

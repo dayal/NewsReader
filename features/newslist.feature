@@ -73,9 +73,10 @@ Scenario: Viewing another user's newslist
   And I safely follow "Technology"
   Then I should safely be on the show page for "Technology"
 
-Scenario: Attempting to view a friend's private NewsList
+Scenario: Attempting to view a private NewsList
 
   Given I am logged in as "user1"
   And I make "Technology" private
   Then I am logged in as "user2"
-
+  And I should safely go to the show page for "Technology"
+  Then I should safely see "You are trying to access a private newslist"
