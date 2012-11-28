@@ -14,6 +14,7 @@ describe User do
     it { should respond_to(:password_confirmation) }
     it { should respond_to(:remember_token) }
     it { should respond_to(:authenticate) }
+    it { should respond_to(:news_lists) }
 
     describe "remember token" do
       before { @user.save }
@@ -77,14 +78,14 @@ describe User do
   describe "when password confirmation is nil" do
     before { @user.password_confirmation = nil }
     it { should_not be_valid }
-    end
+  end
 
   describe "with a password that's too short" do
     before { @user.password = @user.password_confirmation = "a" * 5 }
     it { should be_invalid }
-    end
+  end
 
-    describe "return value of authenticate method" do
+  describe "return value of authenticate method" do
       before { @user.save }
       let(:found_user) { User.find_by_email(@user.email) }
 
@@ -98,5 +99,30 @@ describe User do
         it { should_not == user_for_invalid_password }
         specify { user_for_invalid_password.should be_false }
       end
+  end
+
+  describe "newslist associations" do
+
+    before { @user.save }
+    let!(:older_newslist) do 
+      FactoryGirl.create(:news_list, user: @user, created_at: 1.day.ago)
     end
+    let!(:newer_newslist) do
+
+      FactoryGirl.create(:news_list, user: @user, created_at: 1.hour.ago)
+    end
+
+    it "should have the right newslist in the right order" do
+      @user.news_lists.should == [older_newslist, newer_newslist]
+    end
+
+    it "should destroy associated newslists" do
+      newslists = @user.news_lists.dup
+      @user.destroy
+      newslists.should_not be_empty
+      newslists.each do |newslist|
+        NewsList.find_by_id(newslist.id).should be_nil
+      end
+    end
+  end
 end

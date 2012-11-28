@@ -63,4 +63,16 @@ describe "User pages" do
       specify { user.reload.email.should == new_email }
     end
   end
+
+  describe "create newslist" do
+    let(:user) { FactoryGirl.create(:user) }
+    before do
+      sign_in user
+      visit new_user_news_list_path(user)
+    end
+    describe "with invalid information" do
+      before { click_button "Create NewsList" }
+      it { should have_content('error') }
+    end
+  end
 end
