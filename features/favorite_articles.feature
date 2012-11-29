@@ -1,8 +1,8 @@
-Feature: Favorite Articles
+Feature: NewsLists
 
   As a news reader
   So that I can re-read and share articles
-  I want to be able to favorite articles
+  I want to be able to add articles to NewsLists
 
 Background: Users and articles in database
 
@@ -19,35 +19,90 @@ Background: Users and articles in database
   | Article1 | Content for Article1. | Herp Derp  | www.awebsite.com/article1 | Article1 summary. | 2012-11-16 17:17:00    | 1  |
   | Article2 | Article2's content.   | Derpina A. | www.something.com/2       | Article2 summary. | 2012-11-16 17:17:00   | 2  |
 
-Scenario: Favoriting an article
+Scenario: Creating a NewsList
+
+  When I safely follow "Create NewsList"
+  When I safely fill in "Name" with "Technology"
+  And I safely follow "Create NewsList"
+  Then I should safely see "Successfully created NewsList"
+  And I should safely see "Technology"
+
+Scenario: Adding an article to a created NewsList
 
   Given I am on the page of article named "Article1"
-  When I safely follow "Add to Favorite"
-  Then I should safely see "'Article1' successfully added to favorites."
+  And I have created the NewsList "Favorites"
+  When I safely select "Favorites" from "Add to NewsList"
+  Then I should safely see "'Article1' successfully added to Favorites."
 
-#Scenario: Privately liking an article
+Scenario: Adding an article to an uncreated NewsList
 
-#  Given I am on the page of article named "Article2"
-#  When I press "Privately Like"
-#  Then I should see "'Article2' successfully added to private favorites."
+  Given I am on the page of article named "Article2"
+  When I safely selct "Create NewsList" from "Add to NewsList"
+  Then I should be on the Create NewsList page
+  When I enter "Entertainment" for "Name"
+  And I safely follow "Create NewsList"
+  Then I should safely see "'Article2' successfully added to Entertainment."
 
-Scenario: Viewing a favorite article
+Scenario: Editing a NewsList
 
-  Given I added "Article1" to my favorite articles
-  #And I added "Article2" to my private favorites
-  When I safely follow "Favorite Articles"
-  Then I should safely see "Article1"
-  #And I should see "Private Favorites"
-  #And I should see "Article2" under "Private Favorites"
-  When I safely follow "Article1"
+  Given I am on the Edit page for "Entertainment"
+  When I click "Delete" next to "Article2"
+  Then I should safely see "Article deleted from NewList"
+
+Scenario: Renaming a NewsList
+
+  Given I am on the edit page for "Entertainment"
+  When I fill in "Celebrities" for "Name"
+  And I safely follow "Save Changes"
+  Then I should see "Successfully updated NewsList."
+
+Scenario: Viewing another user's NewsList
+
+  Given I am logged in as "user2"
+  And I safely go to profile page for "user1"
+  And I safely follow "Technology"
+  Then I should safely be on the show page for "Technology"
+
+Scenario: Privating a NewsList
+
+  When I safely go to the edit page for "Technology"
+  And I safely check "Make Private?"
+  And I safely follow "Save Changes"
+  Then I should safely see "Successfully updated NewsList"
+  Given I am logged in as "user2"
+  And I safely go to profile page for "user1"
+  Then I should safely not see "Technology"
+
+Scenario: Unprivating a NewsList
+
+  Given I am logged in as "user1"
+  When I safely go to the edit page for "Technology"
+  And I safely uncheck "Make Private?"
+  And I safely follow "Save Changes"
+  Then I should safely see "Successfully updated NewsList"
+  Given I am logged in as "user2"
+  And I safely go to profile page for "user1"
+  Then I should safely see "Technology"
+
+Scenario: Attempting to view a private NewsList
+
+  Given I make "Technology" private
+  And I am logged in as "user2"
+  When I safely go to the show page for "Technology"
+  Then I should safely see "You are trying to access a private newslist"
+
+Scenario: Viewing an article from a NewsList
+
+  Given I added "Article1" to "Favorites"
+  When I safely follow "Favorites"
+  And I safely follow "Article1"
   Then I should safely see "Content for Article1."
   
-Scenario: Viewing a friend's favorite articles
+Scenario: Viewing a friend's articles from a NewsList
 
   Given I added "Article1" to my favorite articles
-  #And I added "Article2" to my private favorites
   And I am friends with "user2"
   And I am logged in as "user2"
   And I am on the profile page for "user1"
+  And I safeley follow "Favorites"
   Then I should safely see "Article1"
-  And I should not see "Article2"

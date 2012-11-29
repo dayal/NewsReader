@@ -30,3 +30,26 @@ Background: Users in Database
     Then I should safely see "Delete Friend"
     When I safely follow "Delete Friend"
     Then I should safely see "Successfully removed friend!"
+
+  Scenario: Viewing pending friend requests
+
+    Given I am logged in as "user1"
+    And I have added "user2" as a friend
+    And I am on the profile page for "user1"
+    Then I should see "user2" under "Your Friend Requests"
+
+  Scenario: Viewing accepted friend requests
+
+    Given I am logged in as "user1"
+    And I have added "user2" as a friend
+    And "user2" has accepted my friend request
+    And I am on the profile page for "user1"
+    Then I should not see "user2" under "Your Friend Requests"
+
+  Scenario Viewing rejected friend requests
+
+    Given I am logged in as "user1"
+    And I have added "user3" as a friend
+    And "user3" has rejected my friend request
+    And I am on the profile page for "user1"
+    Then I should not see "user3" under "Your Friend Requests"
