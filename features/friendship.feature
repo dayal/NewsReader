@@ -46,7 +46,7 @@ Background: Users in Database
     And I am on the profile page for "user1"
     Then I should not see "user2" under "Your Friend Requests"
 
-  Scenario Viewing rejected friend requests
+  Scenario: Viewing rejected friend requests
 
     Given I am logged in as "user1"
     And I have added "user3" as a friend
