@@ -64,14 +64,14 @@ describe "User pages" do
     end
   end
 
-  describe "create newslist" do
+  describe "create feedslist" do
     let(:user) { FactoryGirl.create(:user) }
     before do
       sign_in user
-      visit new_user_news_list_path(user)
+      visit new_user_feeds_list_path(user)
     end
     describe "with invalid information" do
-      before { click_button "Create NewsList" }
+      before { click_button "Create FeedsList" }
       it { should have_content('error') }
     end
   end

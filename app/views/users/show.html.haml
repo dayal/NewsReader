@@ -6,7 +6,7 @@
           - if current_user?(@user)
             %td{:colspan => 2}
               = link_to "Edit Profile", edit_user_path(@user), :class => "pull-right btn"
-              = link_to "Create NewsList", new_user_news_list_path(@user), :class => "pull-right btn"
+              = link_to "Create FeedsList", new_user_feeds_list_path(@user), :class => "pull-right btn"
           - else
             - if friend_with?
               %td{:colspan => 2}= link_to "Delete Friend", friend_path(profile_user), :method => "DELETE", :class => "pull-right btn"
@@ -31,14 +31,14 @@
               %tr
                 %td Email
                 %td= @user.email
-              - if !@user.news_lists.empty?
+              - if !@user.feeds_lists.empty?
                 %tr
                 %td{:colspan => 2}
-                  %h5 NewsLists
+                  %h5 FeedsLists
                   %ul
-                    - @user.news_lists.each do |newslist|
-                      - if !newslist.is_private
-                        %li= link_to newslist.name, user_news_list_path(@user, newslist)
+                    - @user.feeds_lists.each do |feedslist|
+                      - if !feedslist.is_private
+                        %li= link_to feedslist.name, user_feeds_list_path(@user, feedslist)
               - if !@user.favorite_list.articles.empty?
                 %tr
                 %td{:colspan => 2}

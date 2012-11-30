@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   
   attr_accessible :email, :name, :password, :password_confirmation, :avatar
   has_secure_password
-  has_many :news_lists, dependent: :destroy
+  has_many :feeds_lists, dependent: :destroy
   has_one :favorite_list
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token

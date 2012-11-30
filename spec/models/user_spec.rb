@@ -14,7 +14,7 @@ describe User do
     it { should respond_to(:password_confirmation) }
     it { should respond_to(:remember_token) }
     it { should respond_to(:authenticate) }
-    it { should respond_to(:news_lists) }
+    it { should respond_to(:feeds_lists) }
 
     describe "remember token" do
       before { @user.save }
@@ -101,27 +101,27 @@ describe User do
       end
   end
 
-  describe "newslist associations" do
+  describe "feedslist associations" do
 
     before { @user.save }
-    let!(:older_newslist) do 
-      FactoryGirl.create(:news_list, user: @user, created_at: 1.day.ago)
+    let!(:older_feedslist) do 
+      FactoryGirl.create(:feeds_list, user: @user, created_at: 1.day.ago)
     end
-    let!(:newer_newslist) do
+    let!(:newer_feedslist) do
 
-      FactoryGirl.create(:news_list, user: @user, created_at: 1.hour.ago)
-    end
-
-    it "should have the right newslist in the right order" do
-      @user.news_lists.should == [older_newslist, newer_newslist]
+      FactoryGirl.create(:feeds_list, user: @user, created_at: 1.hour.ago)
     end
 
-    it "should destroy associated newslists" do
-      newslists = @user.news_lists.dup
+    it "should have the right feedslist in the right order" do
+      @user.feeds_lists.should == [older_feedslist, newer_feedslist]
+    end
+
+    it "should destroy associated feedslists" do
+      feedslists = @user.feeds_lists.dup
       @user.destroy
-      newslists.should_not be_empty
-      newslists.each do |newslist|
-        NewsList.find_by_id(newslist.id).should be_nil
+      feedslists.should_not be_empty
+      feedslists.each do |feedslist|
+        FeedsList.find_by_id(feedslist.id).should be_nil
       end
     end
   end

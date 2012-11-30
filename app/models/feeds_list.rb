@@ -1,4 +1,4 @@
-class NewsList < ActiveRecord::Base
+class FeedsList < ActiveRecord::Base
   has_and_belongs_to_many :feeds
   belongs_to :user
   attr_accessible :is_private, :name, :feeds

@@ -18,7 +18,7 @@ FactoryGirl.define do
     	end
   	end
 
-  	factory :news_list do
+  	factory :feeds_list do
     	name "Example Newslist"
     	user
   	end
