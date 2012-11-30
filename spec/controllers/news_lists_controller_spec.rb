@@ -48,12 +48,4 @@ describe FeedsListsController do
 		   get :destroy, {user_id: @user.id, id: feeds_list.id}
 		end
 	end
-	describe 'remove feed' do
-		it 'removes feed'  do
-			 @user.feeds_lists << FeedsList.create(name: 'asdasd')
-		   feeds_list = @user.feeds_lists.first
-		   feeds_list.feeds << Feed.create(feed_url: 'fake')
-		   get :remove_feed, {user_id: @user.id, id: feeds_list.id, feed_id: 1}
-		end
-	end
 end

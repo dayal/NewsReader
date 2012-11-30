@@ -71,6 +71,13 @@ describe "Authentication" do
           specify { response.should redirect_to(root_path) }
         end
       end
+      describe "in the article page" do
+        let(:article) { FactoryGirl.create(:article) }
+        describe "favorite list creation" do
+          before {visit article_path(article)}
+          it {should_not have_link('Add to Favorite')}
+        end
+      end
     end
   end
 end
