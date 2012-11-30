@@ -70,6 +70,7 @@ describe "User pages" do
       sign_in user
       visit new_user_feeds_list_path(user)
     end
+
     describe "with invalid information" do
       before { click_button "Create FeedsList" }
       it { should have_content('error') }
