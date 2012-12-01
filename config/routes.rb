@@ -7,6 +7,10 @@ NewsReader::Application.routes.draw do
     resources :feeds_lists do
       get 'remove_feed', :on => :member
     end
+    resources :news_lists do
+      get 'add_article', :on => :member
+      get 'remove_article', :on => :member
+    end
     resources :favorite_lists, only: [:show] do
       get 'add_article', :on => :member
       get 'remove_article', :on => :member
