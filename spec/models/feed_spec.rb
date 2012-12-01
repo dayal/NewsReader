@@ -21,6 +21,7 @@ describe Feed do
 			Feed.add_articles(feedzirra_feed.entries, @feed)
 			entry = feedzirra_feed.entries.first
 			article = Article.find(:all, conditions: {title: entry.title}).first
+			article.title.should == entry.title
 			article.author.should == entry.author
 			article.summary.should == entry.summary
 			article.content.should == entry.content

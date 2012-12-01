@@ -56,7 +56,7 @@ describe "Authentication" do
             before { put user_path(user) }
             specify { response.should redirect_to(signin_path) }
           end
-      end
+        end
       describe "as wrong user" do
         let(:user) { FactoryGirl.create(:user) }
         let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
@@ -69,6 +69,13 @@ describe "Authentication" do
         describe "submitting a PUT request to the Users#update action" do
           before { put user_path(wrong_user) }
           specify { response.should redirect_to(root_path) }
+        end
+      end
+      describe "in the article page" do
+        let(:article) { FactoryGirl.create(:article) }
+        describe "favorite list creation" do
+          before {visit article_path(article)}
+          it {should_not have_link('Add to Favorite')}
         end
       end
     end
