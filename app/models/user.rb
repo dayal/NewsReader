@@ -13,7 +13,9 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { minimum: 6 }
   validates :password_confirmation, presence: true
-  has_attached_file :avatar, :styles => { :medium => "100x100>" }
+  has_attached_file :avatar, :styles => { :medium => "100x100", :small => "50x50" }
+  validates_attachment_size :avatar, :less_than => 5.megabytes
+
   private
 
     def create_remember_token

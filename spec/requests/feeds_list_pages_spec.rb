@@ -15,6 +15,9 @@ describe "feedslist pages" do
     let(:user) { FactoryGirl.create(:user) }
     let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
     before { sign_in user }
+    let(:feeds_list) {FactoryGirl.create(:feeds_list, user: user)}
+
+    let(:feed) {FactoryGirl.create(:feed)}
 
     describe "feedslist creation" do
       before { visit new_user_feeds_list_path(user) }
@@ -34,7 +37,9 @@ describe "feedslist pages" do
       describe "with valid information" do
 
         describe "non private" do
-          before { fill_in 'Name', with: "Lorem ipsum" }
+          before do
+            fill_in 'Name', with: "Lorem ipsum"
+          end
           it "should create a feedslist" do
             expect { click_button "Create FeedsList" }.to change(FeedsList, :count).by(1)
           end
@@ -55,6 +60,10 @@ describe "feedslist pages" do
             end
             describe "should redirect to home page" do
               before { put user_path(wrong_user) }
+              specify { response.should redirect_to(root_path) }
+            end
+            describe "should redirect to home page when visiting a feedlist" do
+              before { put user_feeds_list_path(wrong_user, feeds_list)}
               specify { response.should redirect_to(root_path) }
             end
           end

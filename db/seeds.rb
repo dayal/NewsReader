@@ -5,5 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-Feed.create(:feed_url => "http://www.engadget.com/rss.xml")
-Feed.create(:feed_url => "feeds.wired.com/wired/index?format=xml")
+Feed.create(:feed_url => "http://www.engadget.com/rss.xml", name: "Engadget")
+Feed.create(:feed_url => "feeds.wired.com/wired/index?format=xml", name: "Wired")

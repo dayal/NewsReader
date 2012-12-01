@@ -1,0 +1,19 @@
+%div.container
+  %div.row
+    %div.span12
+      %h3 Users list
+      %table.table
+        %tr
+          %th Avatar
+          %th Name
+          %th Email
+          %th Add Friend
+        - @users.each do |user|
+          %tr
+            - if user.avatar.present?
+              %td= image_tag(user.avatar.url(:small))
+            - else
+              %td= image_tag ('/assets/emptyprofile.png'), :size => "50x50", :class => "img-polaroid"
+            %td= link_to user.name, user
+            %td= user.email
+            %td= "Add Friend"

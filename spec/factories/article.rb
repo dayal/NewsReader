@@ -13,6 +13,10 @@ FactoryGirl.define do
     image_url "fake_image_url"
   end
 
+  factory :feed do
+    feed_url "http://www.engadget.com/rss.xml"
+    name "Engadget"
+  end
 
 	factory :user do
     	sequence(:name)  { |n| "Person #{n}" }
@@ -23,10 +27,14 @@ FactoryGirl.define do
     	factory :admin do
       		admin true
     	end
-  	end
+  end
 
-  	factory :feeds_list do
-    	name "Example Newslist"
-    	user
-  	end
+  factory :feeds_list do
+    name "Example Newslist"
+    user
+  end
+
+  factory :favorite_list do
+    user
+  end
 end
