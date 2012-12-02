@@ -17,3 +17,5 @@
           %i Privated
         - current_user.feeds_lists.where(:is_private => true).each do |feedslist|
           = render :partial => "shared/right_column_display_feedslist", :locals => { :feedslist => feedslist }
+
+

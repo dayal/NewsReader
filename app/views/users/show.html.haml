@@ -51,5 +51,8 @@
                           |
                           = link_to "Delete", remove_article_user_favorite_list_path(current_user, article)
     %div.span3
-      = render :partial => "shared/right_column"
+      %tr
+        = render :partial => "shared/right_column"
+      %tr 
+        = render :partial => "shared/right_column_friendslist"
 

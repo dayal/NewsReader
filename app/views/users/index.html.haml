@@ -1,7 +1,7 @@
 %div.container
   %div.row
     %div.span12
-      %h3 Users list
+      %h3 Users List
       %table.table
         %tr
           %th Avatar
@@ -9,11 +9,17 @@
           %th Email
           %th Add Friend
         - @users.each do |user|
-          %tr
-            - if user.avatar.present?
-              %td= image_tag(user.avatar.url(:small))
-            - else
-              %td= image_tag ('/assets/emptyprofile.png'), :size => "50x50", :class => "img-polaroid"
-            %td= link_to user.name, user
-            %td= user.email
-            %td= "Add Friend"
+          - if current_user != user
+            %tr
+              - if user.avatar.present?
+                %td= image_tag(user.avatar.url(:small))
+              - else
+                %td= image_tag ('/assets/emptyprofile.png'), :size => "50x50", :class => "img-polaroid"
+              %td= link_to user.name, user
+              %td= user.email
+              - if current_user.friend_with? user
+                %td= link_to "Delete Friend", friend_path(user), :method => "DELETE", :class => "btn btn-mini btn-danger"
+              - elsif current_user.invited? user
+                %td= "Invitation sent..."
+              - else
+                %td= link_to "Add Friend", friends_path(:user_id => user.id), :method => "POST", :class => "btn btn-mini"
