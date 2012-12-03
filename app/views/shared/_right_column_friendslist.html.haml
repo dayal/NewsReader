@@ -8,5 +8,5 @@
             - if user.avatar.present?
               %td= image_tag(user.avatar.url(:small))
             - else
-              %td= image_tag ('/assets/emptyprofile.png'), :size => "50x50", :class => "img-polaroid"
+              %td= image_tag ('/assets/emptyprofile.png'), :size => "42x42", :class => "img-polaroid"
             %td= link_to user.name, user
