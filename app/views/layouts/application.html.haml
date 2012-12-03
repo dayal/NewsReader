@@ -13,22 +13,31 @@
           = link_to "NEWSREADER DIGEST", "/", :class => "brand"
           %ul.nav.pull-right
             - if signed_in?
+              - if !pending_requests.empty?
+                %li.dropdown
+                  %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                    New friend requests!
+                    %b.caret
+                  %ul.dropdown-menu
+                    %table.table.table-hover.table-condensed.requestTable
+                      - pending_requests.each do |user|
+                        %tr
+                          %td= user.name
+                          %td= link_to "Confirm", friend_path(user), :method => "put", :class => "btn btn-mini btn-primary btn-notify"
+              %li= link_to "Find Users", users_path
+              %li.dropdown
+                %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                  = current_user.name
+                  %b.caret
+                %ul.dropdown-menu
+                  %li= link_to "Profile", current_user
+                  %li= link_to "Create FeedsList", new_user_feeds_list_path(current_user)
+                  %li
+                  %li= link_to "Log Out", signout_path, :method => "delete"
               -if not current_user.avatar.present?
                 = link_to image_tag('/assets/emptyprofile.png'), current_user, :class => "pictureHeader img-polaroid"
               -else
                 = image_tag current_user.avatar.url(:medium) , :class => "pictureHeader"
-              %ul.nav
-                %li.dropdown
-                  %a.dropdown-toggle{"data-goggle" => "dropdown", :href => "#"}
-                    = current_user.name
-                    %b.caret
-                  %ul.dropdown-menu
-                    %li
-                      %a{:href => current_user, :tabindex => "-1"} Profile
-                    %li= link_to "Profile", current_user
-                    %li= link_to "Create FeedsList", new_user_feeds_list_path(current_user)
-                    %li= link_to "Log Out", signout_path, :method => "delete"
-              %li= link_to "Find Users", users_path
             - else
               %li= link_to "Log In", signin_path, id: 'log_in'
               %li= link_to "Sign Up", signup_path

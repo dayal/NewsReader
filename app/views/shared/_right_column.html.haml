@@ -1,13 +1,6 @@
 - if signed_in?
   %div.well
     %p Welcome back, #{current_user.name}!
-    - if !pending_requests.empty?
-      %p You have friend requests!
-      %ul
-        - pending_requests.each do |user|
-          %li
-            = user.name
-            = link_to "Confirm?", friend_path(user), :method => "put"
     - if !current_user.feeds_lists.empty?
       %h4 Your FeedsLists
       - current_user.feeds_lists.where(:is_private => false).each do |feedslist|
@@ -17,5 +10,3 @@
           %i Privated
         - current_user.feeds_lists.where(:is_private => true).each do |feedslist|
           = render :partial => "shared/right_column_display_feedslist", :locals => { :feedslist => feedslist }
-
-
