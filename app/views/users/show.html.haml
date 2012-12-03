@@ -1,6 +1,6 @@
 %div.container
   %div.row
-    %div.span19
+    %div.span9
       %table.table
         %tr
           - if current_user?(@user)
@@ -23,7 +23,7 @@
               = image_tag ('/assets/emptyprofile.png'), :size=> "100x100", :class => "img-polaroid" 
             -else
               = image_tag @user.avatar.url(:medium) 
-          %td.span7
+          %td.span9
             %table.table
               %tr
                 %td Name
@@ -31,14 +31,18 @@
               %tr
                 %td Email
                 %td= @user.email
-              - if !@user.feeds_lists.empty?
-                %tr
-                %td{:colspan => 2}
+              %tr
+                %td
                   %h5 FeedsLists
-                  %ul
-                    - @user.feeds_lists.each do |feedslist|
-                      - if !feedslist.is_private
-                        %li= link_to feedslist.name, user_feeds_list_path(@user, feedslist)
+
+                   
+                - if !@user.feeds_lists.empty?
+                  %tr
+                  %td{:colspan => 2}
+                    %ul
+                      - @user.feeds_lists.each do |feedslist|
+                        - if !feedslist.is_private
+                          %li= link_to feedslist.name, user_feeds_list_path(@user, feedslist)
               - if !@user.favorite_list.articles.empty?
                 %tr
                 %td{:colspan => 2}
@@ -51,5 +55,8 @@
                           |
                           = link_to "Delete", remove_article_user_favorite_list_path(current_user, article)
     %div.span3
-      = render :partial => "shared/right_column"
+      %tr
+        = render :partial => "shared/right_column"
+      %tr 
+        = render :partial => "shared/right_column_friendslist"
 
