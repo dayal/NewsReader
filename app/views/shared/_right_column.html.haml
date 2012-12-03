@@ -1,5 +1,5 @@
-%div.well
-  - if signed_in?
+- if signed_in?
+  %div.well
     %p Welcome back, #{current_user.name}!
     - if !pending_requests.empty?
       %p You have friend requests!

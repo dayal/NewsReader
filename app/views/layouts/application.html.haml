@@ -16,7 +16,7 @@
               -if not current_user.avatar.present?
                 = link_to image_tag('/assets/emptyprofile.png'), current_user, :class => "pictureHeader"
               -else
-                = image_tag current_user.avatar.url(:medium) , :class => "pictureHeader"
+                = link_to image_tag(current_user.avatar.url(:medium)) , current_user,:class => "pictureHeader"
               %li= link_to current_user.name, current_user 
               %li= link_to "Find Users", users_path
               %ul.nav.nav-pills
