@@ -7,31 +7,28 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
   %body
-    %div.navbar.navbar-inverse.navbar-fixed-top
+    %div.navbar.navbar-fixed-top
       %div.navbar-inner
         %div.container
           = link_to "NEWSREADER DIGEST", "/", :class => "brand"
           %ul.nav.pull-right
             - if signed_in?
               -if not current_user.avatar.present?
-                = link_to image_tag('/assets/emptyprofile.png'), current_user, :class => "pictureHeader"
+                = link_to image_tag('/assets/emptyprofile.png'), current_user, :class => "pictureHeader img-polaroid"
               -else
                 = image_tag current_user.avatar.url(:medium) , :class => "pictureHeader"
-              %li= link_to current_user.name, current_user 
-              %li= link_to "Find Users", users_path
-              %ul.nav.nav-pills
+              %ul.nav
                 %li.dropdown
-                  %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#{}"}
-                    Setting
+                  %a.dropdown-toggle{"data-goggle" => "dropdown", :href => "#"}
+                    = current_user.name
                     %b.caret
                   %ul.dropdown-menu
                     %li
-                      %a{:href => edit_user_path(current_user), :tabindex => "-1"} Edit Profile
-                    %li
-                      %a{:href => new_user_feeds_list_path(current_user), :tabindex => "-1"} Create FeedsList
-                    %li.divider
-                    %li= link_to "Log Out", signout_path, :method => "delete", id: 'log_out'
-
+                      %a{:href => current_user, :tabindex => "-1"} Profile
+                    %li= link_to "Profile", current_user
+                    %li= link_to "Create FeedsList", new_user_feeds_list_path(current_user)
+                    %li= link_to "Log Out", signout_path, :method => "delete"
+              %li= link_to "Find Users", users_path
             - else
               %li= link_to "Log In", signin_path, id: 'log_in'
               %li= link_to "Sign Up", signup_path
