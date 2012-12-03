@@ -5,6 +5,12 @@ class ArticlesController < ApplicationController
 
     def show 
     	@article = Article.find(params[:id])
+      @content = "There is no content"
+      if !@article.content.nil?
+        @content = Article.extract_paragraphs(@article.content.sanitize)
+      elsif !@article.summary.nil?
+        @content = Article.extract_paragraphs(@article.summary.sanitize)
+      end
     rescue ActiveRecord::RecordNotFound
       flash[:notice] = "That article could not be found"
       redirect_to root_url
