@@ -11,7 +11,7 @@ NewsReader::Application.routes.draw do
       get 'add_article', :on => :member
       get 'remove_article', :on => :member
     end
-    resources :favorite_lists, only: [:show] do
+    resources :shared_lists, only: [:show] do
       get 'add_article', :on => :member
       get 'remove_article', :on => :member
     end

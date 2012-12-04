@@ -34,7 +34,7 @@ FactoryGirl.define do
     user
   end
 
-  factory :favorite_list do
+  factory :shared_list do
     user
   end
 end
