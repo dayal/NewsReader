@@ -7,10 +7,11 @@
         = @article.summary.html_safe
       - elsif !@article.content.nil?
         = @article.content.html_safe
-      - if signed_in?
-        - if current_user.favorite_list.articles.exists?(@article.id)
-          %p= link_to "Delete from Favorite", remove_article_user_favorite_list_path(current_user, @article), :class => "pull-left btn"
-        - else
-          %p= link_to "Add to Favorite", add_article_user_favorite_list_path(current_user, @article), :class => "pull-left btn"
+      -#
+        - if signed_in?
+          - if current_user.favorite_list.articles.exists?(@article.id)
+            %p= link_to "Delete from Favorite", remove_article_user_favorite_list_path(current_user, @article), :class => "pull-left btn"
+          - else
+            %p= link_to "Add to Favorite", add_article_user_favorite_list_path(current_user, @article), :class => "pull-left btn"
     %div.span3
       = render :partial => "shared/right_column"

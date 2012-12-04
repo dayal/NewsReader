@@ -1,4 +1,4 @@
-class FavoriteListsController < ApplicationController
+class SharedListsController < ApplicationController
 	before_filter :signed_in_user
 
 	def show
@@ -10,8 +10,8 @@ class FavoriteListsController < ApplicationController
 		@user = User.find(params[:user_id])
 		@article = Article.find(params[:id])
 		if @article
-			@user.favorite_list.articles << @article
-			flash[:success] = "Article added to favorite list."
+			@user.shared_list.articles << @article
+			flash[:success] = "Article shared to friends."
 			redirect_to request.referrer
 		else
 			render 'show'
@@ -22,8 +22,8 @@ class FavoriteListsController < ApplicationController
 		@user = User.find(params[:user_id])
 		@article = Article.find(params[:id])
 		if @article
-			@user.favorite_list.articles.delete(@article)
-			flash[:success] = "Article removed from favorite list."
+			@user.shared_list.articles.delete(@article)
+			flash[:success] = "Article removed from the shared list."
 			redirect_to request.referrer
 		else
 			render 'show'

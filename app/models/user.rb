@@ -5,10 +5,10 @@ class User < ActiveRecord::Base
   has_secure_password
   has_many :feeds_lists, dependent: :destroy
   has_many :news_lists
-  has_one :favorite_list
+  has_one :shared_list
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
-  after_create :create_favorite_list
+  after_create :create_shared_list
   validates :name, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
       self.remember_token = SecureRandom.urlsafe_base64
     end
 
-    def create_favorite_list
-      self.favorite_list = FavoriteList.create
+    def create_shared_list
+      self.shared_list = SharedList.create
     end
 end

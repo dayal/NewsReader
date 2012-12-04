@@ -1,6 +1,15 @@
 class ArticlesController < ApplicationController	
     def index
       @articles = Article.find(:all, order: "published_at DESC")
+      if current_user
+      	@shared_articles = []
+      	current_user.friends.each do |friend|
+      		friend.shared_list.articles.each do |article|
+      			@shared_articles << article
+      		end
+      	end
+      	@shared_articles.sort! { |a, b|  a.published_at <=> b.published_at }
+
     end
 
     def show 
