@@ -54,7 +54,7 @@ class NewsListsController < ApplicationController
   	@news_list.delete
     flash[:success] = "Successfully deleted '#{@news_list.name}' NewsList"
     @news_lists = @user.news_lists
-    render 'index'
+    redirect_to user_path(@user)
   end
 
   def add_article

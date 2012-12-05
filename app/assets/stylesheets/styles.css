@@ -126,3 +126,7 @@ body {
   padding:10px 0;
   border-top: 1px solid;
 }
+
+.row_height {
+  height: 70px;
+}
