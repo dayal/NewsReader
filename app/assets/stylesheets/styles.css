@@ -4,6 +4,19 @@ body {
   padding-bottom: 40px;
 }
 
+.well {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.userTable tr td{
+  border-style: none;
+}
+
+/* artcles display for front page & relevant pages */
+
 .overlay img {
   z-index: 5;
   opacity: 0;
@@ -62,6 +75,8 @@ body {
   top: 130px;
   left: 0;
 }
+
+/* error styling */
 
 #error_explanation {
   color: #f00;

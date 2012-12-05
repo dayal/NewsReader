@@ -13,7 +13,6 @@ Background: Users in database
 
   And I am logged in as "user1"
   And I am on the profile page for "user1"
-  #Create fake Feeds (Engadget, Wired)
 
 Scenario: Creating a FeedsList
 
@@ -34,7 +33,7 @@ Scenario: Creating a FeedsList sadpath: no name
 Scenario: Editing a FeedsList
 
   When I safely go to the edit page for "Technology"
-  And I safely select "Wired Top Stories" from "Available Feeds"
+  And I safely select "Techcrunch" from "Available Feeds"
   And I safely follow "Save Changes"
   Then I should safely see "Successfully updated FeedsList"
 

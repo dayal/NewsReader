@@ -1,16 +1,16 @@
 %div.container
   %div.row
     %div.span9
-      %h2 #{@article.title}
-      %h4 Written by #{@article.author} on #{@article.published_at.strftime("%B %d, %Y")}
-      - if !@article.summary.nil?
-        = @article.summary.html_safe
-      - elsif !@article.content.nil?
-        = @article.content.html_safe
-      - if signed_in?
-        - if current_user.shared_list.articles.exists?(@article.id)
-          %p= link_to "Not Share to Friends", remove_article_user_shared_list_path(current_user, @article), :class => "pull-left btn"
-        - else
-          %p= link_to "Share to Friends", add_article_user_shared_list_path(current_user, @article), :class => "pull-left btn"
+      %div.well
+        %h2 #{@article.title}
+        %h4 Written by #{@article.author} on #{@article.published_at.strftime("%B %d, %Y")}
+        - @content.each do |paragraph|
+          = paragraph.html_safe
     %div.span3
+      %div.well
+        - if signed_in?
+          - if current_user.shared_list.articles.exists?(@article.id)
+            %p= link_to "Not Share to Friends", remove_article_user_shared_list_path(current_user, @article), :class => "pull-left btn"
+          - else
+            %p= link_to "Share to Friends", add_article_user_shared_list_path(current_user, @article), :class => "pull-left btn"
       = render :partial => "shared/right_column"

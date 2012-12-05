@@ -10,6 +10,12 @@ class Article < ActiveRecord::Base
     img_srcs[0]
   end
 
+  def self.extract_paragraphs(content)
+    doc = Nokogiri::HTML(content)
+    paragraphs = doc.css('p').map{ |p| p.to_html }
+    paragraphs
+  end
+
   def feed_name
   	self.feed.name
   end
