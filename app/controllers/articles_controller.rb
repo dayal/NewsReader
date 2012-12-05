@@ -9,7 +9,7 @@ class ArticlesController < ApplicationController
       		end
       	end
       	@shared_articles.sort! { |a, b|  a.published_at <=> b.published_at }
-
+      end
     end
 
     def show 

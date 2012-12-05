@@ -25,7 +25,7 @@ class NewsListsController < ApplicationController
   	@news_list = NewsList.new(name: params[:news_list][:name])
     @user.news_lists << @news_list
   	if @news_list.save
-  		redirect_to @news_list
+  		redirect_to user_news_list_path(@user, @news_list)
   		flash[:success] = "Successfulled created NewsList"
   	else
       @news_lists = @user.news_lists

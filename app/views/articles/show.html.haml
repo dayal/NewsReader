@@ -9,5 +9,5 @@
     %div.span3
       %div.well
         - if signed_in?
-          = link_to "Add to Favorites", add_article_user_favorite_list_path(current_user, @article), :class => "btn btn-inverse btn-block"
+          = link_to "Add to Favorites", "#", :class => "btn btn-inverse btn-block"
       = render :partial => "shared/right_column"
