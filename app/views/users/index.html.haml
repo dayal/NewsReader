@@ -12,7 +12,7 @@
           - if current_user != user
             %tr
               - if user.avatar.present?
-                %td= image_tag(user.avatar.url(:small))
+                %td= image_tag (user.avatar.url(:small))
               - else
                 %td= image_tag ('/assets/emptyprofile.png'), :size => "42x42", :class => "img-polaroid"
               %td= link_to user.name, user
