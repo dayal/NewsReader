@@ -37,9 +37,13 @@ class FeedsListsController < ApplicationController
   	@feeds_list = FeedsList.new(name: params[:feeds_list][:name], is_private: params[:feeds_list][:is_private])
     @user.feeds_lists << @feeds_list
   	if @feeds_list.save
-      params[:feeds_list][:feeds][1..-1].each do |feed_id|
-        @feed = Feed.find(feed_id)
-        @feeds_list.feeds << @feed if @feed
+      if params[:feeds_list][:feeds][1..-1] != ""
+        params[:feeds_list][:feeds][1..-1].each do |feed_id|
+          if feed_id != ""
+            @feed = Feed.find(feed_id)
+            @feeds_list.feeds << @feed if @feed
+          end
+        end
       end
       feeds_url = params[:feeds_list][:feeds_url]
       if feeds_url != ""
@@ -47,7 +51,12 @@ class FeedsListsController < ApplicationController
         if @feed
           @feeds_list.feeds << @feed
         else
-          @feeds_list.feeds << Feed.create(feed_url: feeds_url)
+          feedzirra_feed = Feedzirra::Feed.fetch_and_parse(feeds_url)
+          if feedzirra_feed != 0
+            @feeds_list.feeds << Feed.create(feed_url: feeds_url)
+          else
+            redirect_to request.referrer, notice: "Unable to retrieve feed from the URL" and return
+          end
         end
       end
   		redirect_to @user
@@ -67,9 +76,13 @@ class FeedsListsController < ApplicationController
   def update
     @feeds_list = FeedsList.find(params[:id])
   	if @feeds_list.update_attributes(name: params[:feeds_list][:name])
-      params[:feeds_list][:feeds][1..-1].each do |feed_id|
-        @feed = Feed.find(feed_id)
-        @feeds_list.feeds << @feed if @feed
+      if params[:feeds_list][:feeds][1..-1] != ""
+        params[:feeds_list][:feeds][1..-1].each do |feed_id|
+          if feed_id
+            @feed = Feed.find(feed_id)
+            @feeds_list.feeds << @feed if @feed
+          end
+        end
       end
       feeds_url = params[:feeds_list][:feeds_url]
       if feeds_url != ""
@@ -77,7 +90,12 @@ class FeedsListsController < ApplicationController
         if @feed
           @feeds_list.feeds << @feed
         else
-          @feeds_list.feeds << Feed.create(feed_url: feeds_url)
+          feedzirra_feed = Feedzirra::Feed.fetch_and_parse(feeds_url)
+          if feedzirra_feed != 0
+            @feeds_list.feeds << Feed.create(feed_url: feeds_url)
+          else
+            redirect_to request.referrer, notice: "Unable to retrieve feed from the URL" and return
+          end
         end
       end
   		flash[:success] = "Successfully updated FeedsList"

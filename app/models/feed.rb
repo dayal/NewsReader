@@ -30,7 +30,7 @@ class Feed < ActiveRecord::Base
   end
 =end
 
-  private
+
 
 	  def add_article
 	  	feedzirra_feed = Feedzirra::Feed.fetch_and_parse(self.feed_url)
@@ -39,7 +39,7 @@ class Feed < ActiveRecord::Base
 
 	 	def create_name
 	 		feedzirra_feed = Feedzirra::Feed.fetch_and_parse(self.feed_url)
-	 		self.update_attributes(name: feedzirra_feed.title) unless (feedzirra_feed == 0 || !feedzirra_feed.nil?)
+	 		self.update_attributes(name: feedzirra_feed.title) unless (feedzirra_feed == 0 || feedzirra_feed.nil?)
 	 	end
 
 	  def self.add_articles(entries, feed)
