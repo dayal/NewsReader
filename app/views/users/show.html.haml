@@ -43,18 +43,17 @@
                       - @user.feeds_lists.each do |feedslist|
                         - if !feedslist.is_private
                           %li= link_to feedslist.name, user_feeds_list_path(@user, feedslist)
-              -#
-                - if !@user.favorite_list.articles.empty?
-                  %tr
-                  %td{:colspan => 2}
-                    %h5 Favorite Articles
-                    %ul
-                      - @user.favorite_list.articles.each do |article|
-                        %li
-                          = link_to article.title, article_path(article)
-                          - if current_user?(@user)
-                            |
-                            = link_to "Delete", remove_article_user_favorite_list_path(current_user, article)
+              - if !@user.shared_list.articles.empty?
+                %tr
+                %td{:colspan => 2}
+                  %h5 Shared Articles
+                  %ul
+                    - @user.shared_list.articles.each do |article|
+                      %li
+                        = link_to article.title, article_path(article)
+                        - if current_user?(@user)
+                          |
+                          = link_to "Delete", remove_article_user_shared_list_path(current_user, article)
     %div.span3
       %tr
         = render :partial => "shared/right_column"

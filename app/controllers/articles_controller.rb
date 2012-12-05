@@ -20,8 +20,9 @@ class ArticlesController < ApplicationController
       elsif !@article.summary.nil?
         @content = Article.extract_paragraphs(@article.summary.sanitize)
       end
-    rescue ActiveRecord::RecordNotFound
-      flash[:notice] = "That article could not be found"
-      redirect_to root_url
+      rescue ActiveRecord::RecordNotFound
+        flash[:notice] = "That article could not be found"
+        redirect_to root_url
+      end
     end
 end
