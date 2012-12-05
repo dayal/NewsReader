@@ -14,7 +14,8 @@ describe User do
     it { should respond_to(:password_confirmation) }
     it { should respond_to(:remember_token) }
     it { should respond_to(:authenticate) }
-    it { should respond_to(:favorite_list) }
+    it { should respond_to(:shared_list) }    
+    it { should respond_to(:news_lists) }
     it { should respond_to(:feeds_lists) }
 
     describe "remember token" do

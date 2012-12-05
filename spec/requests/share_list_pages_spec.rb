@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe "favorite list pages" do
+describe "share list pages" do
 
-	subject { page }
+  subject { page }
 
   describe "when user signed in" do
 
@@ -10,19 +10,19 @@ describe "favorite list pages" do
     before { sign_in user }
     let(:article) { FactoryGirl.create(:article) }
 
-    describe "create favorite list" do
-    	before {visit article_path(article)}
-      it {should have_link('Add to Favorite')}
+    describe "create share list" do
+      before {visit article_path(article)}
+      it {should have_link('Share to Friends')}
 
 
       describe "visit profile page without favorite list" do
         before { visit user_path(user) }
-        it { should_not  have_selector('h5', text: 'Favorite Articles') }
+        it { should_not  have_selector('h5', text: 'Shared Articles') }
       end
 
       describe "visit profile page" do
         before do
-          click_link 'Add to Favorite'
+          click_link 'Share to Friends'
           visit user_path(user)
         end
         it { should have_selector('h5', text: 'Favorite Articles') }
@@ -31,10 +31,9 @@ describe "favorite list pages" do
 
         describe "delete a article" do
           before {click_link 'Delete'}
-          it { should_not  have_selector('h5', text: 'Favorite Articles') }
+          it { should_not  have_selector('h5', text: 'Share to Friends') }
         end
       end
     end
   end
 end
-
