@@ -14,12 +14,6 @@ describe "share list pages" do
       before {visit article_path(article)}
       it {should have_link('Share to Friends')}
 
-
-      describe "visit profile page without favorite list" do
-        before { visit user_path(user) }
-        it { should_not  have_selector('h5', text: 'Shared Articles') }
-      end
-
       describe "visit profile page" do
         before do
           click_link 'Share to Friends'
@@ -29,6 +23,10 @@ describe "share list pages" do
         it {should have_link(article.title)}
         it {should have_link('Delete')}
 
+        describe "delete a article" do
+          before {click_link 'Delete'}
+          it { should_not  have_selector('h5', text: 'Share to Friends') }
+        end
       end
     end
   end
