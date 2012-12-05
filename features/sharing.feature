@@ -28,5 +28,8 @@ Scenario: Sharing articles
 
 Scenario: Viewing shared articles
 
-  Given "user2" has shared "Article2"
-  Then I should safely see "Article2" under "News shared by your friends"
+  Given I am logged in as "user2"
+  And I am on the page of article named "Article1"
+  And I safely follow "Share to friends"
+  When I am logged in as "user1"
+  Then I should safely see "Article2"
