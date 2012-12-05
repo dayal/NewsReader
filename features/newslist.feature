@@ -29,32 +29,18 @@ Scenario: Creating a NewsList
 
 Scenario: Adding an article to a created NewsList
 
-  Given I am on the page of article named "Article1"
-  And I have created the NewsList "Favorites"
+  Given I have created the NewsList "Favorites"
+  And I am on the page of article named "Article1"
   When I safely select "Favorites" from "Add to NewsList"
-  Then I should safely see "'Article1' successfully added to Favorites."
-
-Scenario: Adding an article to an uncreated NewsList
-
-  Given I am on the page of article named "Article2"
-  When I safely selct "Create NewsList" from "Add to NewsList"
-  Then I should be on the Create NewsList page
-  When I enter "Entertainment" for "Name"
-  And I safely follow "Create NewsList"
-  Then I should safely see "'Article2' successfully added to Entertainment."
-
-Scenario: Editing a NewsList
-
-  Given I am on the Edit page for "Entertainment"
-  When I click "Delete" next to "Article2"
-  Then I should safely see "Article deleted from NewList"
+  Then I should safely see "Article added to NewsList."
 
 Scenario: Renaming a NewsList
 
-  Given I am on the edit page for "Entertainment"
-  When I fill in "Celebrities" for "Name"
+  Given I have created the NewsList "Entertainment"
+  When I safely select "Edit NewsList" from "Entertainment"
+  When I safely fill in "Name" with "Celebrities"
   And I safely follow "Save Changes"
-  Then I should see "Successfully updated NewsList."
+  Then I should safely see "Successfully updated NewsList."
 
 Scenario: Viewing another user's NewsList
 
@@ -63,37 +49,11 @@ Scenario: Viewing another user's NewsList
   And I safely follow "Technology"
   Then I should safely be on the show page for "Technology"
 
-Scenario: Privating a NewsList
-
-  When I safely go to the edit page for "Technology"
-  And I safely check "Make Private?"
-  And I safely follow "Save Changes"
-  Then I should safely see "Successfully updated NewsList"
-  Given I am logged in as "user2"
-  And I safely go to profile page for "user1"
-  Then I should safely not see "Technology"
-
-Scenario: Unprivating a NewsList
-
-  Given I am logged in as "user1"
-  When I safely go to the edit page for "Technology"
-  And I safely uncheck "Make Private?"
-  And I safely follow "Save Changes"
-  Then I should safely see "Successfully updated NewsList"
-  Given I am logged in as "user2"
-  And I safely go to profile page for "user1"
-  Then I should safely see "Technology"
-
-Scenario: Attempting to view a private NewsList
-
-  Given I make "Technology" private
-  And I am logged in as "user2"
-  When I safely go to the show page for "Technology"
-  Then I should safely see "You are trying to access a private feedslist"
-
 Scenario: Viewing an article from a NewsList
 
-  Given I added "Article1" to "Favorites"
+  Given I have created the NewsList "Favorites"
+  And I am on the page of article named "Article1"
+  When I safely select "Favorites" from "Add to NewsList"
   When I safely follow "Favorites"
   And I safely follow "Article1"
   Then I should safely see "Content for Article1."
@@ -104,5 +64,5 @@ Scenario: Viewing a friend's articles from a NewsList
   And I am friends with "user2"
   And I am logged in as "user2"
   And I am on the profile page for "user1"
-  And I safeley follow "Favorites"
+  And I safely follow "Favorites"
   Then I should safely see "Article1"
