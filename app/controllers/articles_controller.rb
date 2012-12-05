@@ -23,6 +23,5 @@ class ArticlesController < ApplicationController
       rescue ActiveRecord::RecordNotFound
         flash[:notice] = "That article could not be found"
         redirect_to root_url
-      end
     end
 end

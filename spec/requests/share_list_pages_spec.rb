@@ -25,7 +25,7 @@ describe "share list pages" do
           click_link 'Share to Friends'
           visit user_path(user)
         end
-        it { should have_selector('h5', text: 'Favorite Articles') }
+        it { should have_selector('h5', text: 'Shared Articles') }
         it {should have_link(article.title)}
         it {should have_link('Delete')}
 
