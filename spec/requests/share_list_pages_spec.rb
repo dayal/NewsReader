@@ -29,10 +29,6 @@ describe "share list pages" do
         it {should have_link(article.title)}
         it {should have_link('Delete')}
 
-        describe "delete a article" do
-          before {click_link 'Delete'}
-          it { should_not  have_selector('h5', text: 'Share to Friends') }
-        end
       end
     end
   end
