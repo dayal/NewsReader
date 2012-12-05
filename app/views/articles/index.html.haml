@@ -1,6 +1,9 @@
 %div.container
   %div.row
     %div.span9
-      = render :partial => "shared/render_articles"
+      %h4 Latest News
+      = render :partial => "shared/render_articles", :locals => { :articles => @articles.take(10) }
+      %h4 News Shared by Your Friends
+      = render :partial => "shared/render_articles", :locals => { :articles => @shared_articles.take(10) }
     %div.span3
       = render :partial => "shared/right_column"
