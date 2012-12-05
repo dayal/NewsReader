@@ -31,8 +31,9 @@
                   %b.caret
                 %ul.dropdown-menu
                   %li= link_to "Profile", current_user
+                  %li= link_to "Create NewsList", new_user_news_list_path(current_user)
                   %li= link_to "Create FeedsList", new_user_feeds_list_path(current_user)
-                  %li
+                  %li.divider
                   %li= link_to "Log Out", signout_path, :method => "delete"
               -if not current_user.avatar.present?
                 = link_to image_tag('/assets/emptyprofile.png'), current_user, :class => "pictureHeader img-polaroid"

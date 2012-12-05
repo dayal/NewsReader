@@ -40,9 +40,9 @@ class NewsListsController < ApplicationController
 
   def update
     @news_list = NewsList.find(params[:id])
-  	if @news_list.update_attributes(name: params[:feeds_list][:name])
+  	if @news_list.update_attributes(name: params[:news_list][:name])
   		flash[:success] = "Successfully updated NewsList"
-  		redirect_to @news_list
+  		redirect_to user_news_list_path(@user, @news_list)
   	else
       @news_lists = @user.news_lists
   		render 'edit'
