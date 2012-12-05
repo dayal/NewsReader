@@ -33,26 +33,37 @@
                 %td Email
                 %td= @user.email
               %tr
-                %td
+                %td{:colspan => 2}
                   %h5 FeedsLists
-                - if !@user.feeds_lists.empty?
-                  %tr
-                  %td{:colspan => 2}
+                  - if !@user.feeds_lists.empty?
                     %ul
                       - @user.feeds_lists.each do |feedslist|
                         - if !feedslist.is_private
                           %li= link_to feedslist.name, user_feeds_list_path(@user, feedslist)
-              - if !@user.shared_list.articles.empty?
-                %tr
+                  - else
+                    %p This user has no public FeedsList
+              %tr
+                %td{:colspan => 2}
+                  %h5 NewsLists
+                  - if !@user.news_lists.empty?
+                    %ul
+                      - @user.news_lists.each do |newslist|
+                        %li= link_to newslist.name, user_news_list_path(@user, newslist)
+                  - else
+                    %p This user has no public NewsList
+              %tr
                 %td{:colspan => 2}
                   %h5 Shared Articles
-                  %ul
-                    - @user.shared_list.articles.each do |article|
-                      %li
-                        = link_to article.title, article_path(article)
-                        - if current_user?(@user)
-                          |
-                          = link_to "Delete", remove_article_user_shared_list_path(current_user, article)
+                  - if !@user.shared_list.articles.empty?
+                    %ul
+                      - @user.shared_list.articles.each do |article|
+                        %li
+                          = link_to article.title, article_path(article)
+                          - if current_user?(@user)
+                            |
+                            = link_to "Delete", remove_article_user_shared_list_path(current_user, article)
+                  - else
+                    %p This user has no shared articles.
     %div.span3
       %tr
         = render :partial => "shared/right_column"
