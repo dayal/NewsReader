@@ -4,9 +4,10 @@ class FriendshipsController < ApplicationController
   def create
     invitee = User.find_by_id(params[:user_id])
     if current_user.invite invitee
-      redirect_to user_path(invitee), :notice => "Successfully invited friend!"
+      
+      redirect_to request.referrer, :notice => "Successfully invited friend!"
     else
-      redirect_to user_path(invitee), :notice => "Sorry! You can't invite that user!"
+      redirect_to request.referrer, :notice => "Sorry! You can't invite that user!"
     end
   end
 
